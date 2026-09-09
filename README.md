@@ -1,4 +1,4 @@
-# Photographer Comparison — Meera & Smit, Jan 2027
+# Photographer Comparison — Jan 2027
 
 An offline-first dashboard comparing six wedding photography quotations
 (26–28 January 2027, Mumbai).
