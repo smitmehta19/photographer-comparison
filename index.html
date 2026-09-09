@@ -1,0 +1,1539 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Six Wedding Quotations</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap">
+<style>
+:root{
+  --ground:#F1F3F1; --sunk:#E7EAE7; --surface:#FFFFFF; --surface2:#F7F9F7; --surface3:#EEF1EF;
+  --ink:#14181A; --ink2:#3A4144; --muted:#697174; --faint:#9AA1A2;
+  --line:#DEE3E0; --line2:#C7CECB;
+  --accent:#1C5C79; --accent2:#2A7FA3; --accentSoft:#E2EDF2; --accentLine:#BAD5E0;
+  --ok:#3B7550; --okSoft:#E4EFE7;
+  --warn:#9C5C0C; --warnSoft:#F7EBDA;
+  --miss:#7C8385; --missSoft:#ECEEED;
+  --calc:#5C4A8A; --calcSoft:#EBE7F4;
+  --star:#A97A12; --starSoft:#F6EEDA;
+  --rej:#9E3229; --rejSoft:#F6E7E5;
+  --maybe:#5C4A8A; --maybeSoft:#EBE7F4;
+  --shadow:0 1px 1px rgba(20,24,26,.04), 0 12px 26px -20px rgba(20,24,26,.35);
+  --sans:"Archivo",ui-sans-serif,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --serif:"Fraunces",ui-serif,Georgia,"Times New Roman",serif;
+  --mono:"DM Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0F1214; --sunk:#0A0C0D; --surface:#171B1D; --surface2:#1D2224; --surface3:#232829;
+    --ink:#ECEFEE; --ink2:#C6CCCB; --muted:#949B9B; --faint:#6E7576;
+    --line:#2A3032; --line2:#3A4144;
+    --accent:#6FB6D4; --accent2:#8CC8E1; --accentSoft:#132A34; --accentLine:#23485A;
+    --ok:#74B58C; --okSoft:#142218;
+    --warn:#D9A05A; --warnSoft:#2A2015;
+    --miss:#8E9596; --missSoft:#222627;
+    --calc:#A996D8; --calcSoft:#1E1A2B;
+    --star:#D4AA4E; --starSoft:#282013;
+    --rej:#DE8A80; --rejSoft:#2B1917;
+    --maybe:#A996D8; --maybeSoft:#1E1A2B;
+    --shadow:0 1px 1px rgba(0,0,0,.5), 0 12px 26px -20px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0F1214; --sunk:#0A0C0D; --surface:#171B1D; --surface2:#1D2224; --surface3:#232829;
+  --ink:#ECEFEE; --ink2:#C6CCCB; --muted:#949B9B; --faint:#6E7576;
+  --line:#2A3032; --line2:#3A4144;
+  --accent:#6FB6D4; --accent2:#8CC8E1; --accentSoft:#132A34; --accentLine:#23485A;
+  --ok:#74B58C; --okSoft:#142218;
+  --warn:#D9A05A; --warnSoft:#2A2015;
+  --miss:#8E9596; --missSoft:#222627;
+  --calc:#A996D8; --calcSoft:#1E1A2B;
+  --star:#D4AA4E; --starSoft:#282013;
+  --rej:#DE8A80; --rejSoft:#2B1917;
+  --maybe:#A996D8; --maybeSoft:#1E1A2B;
+  --shadow:0 1px 1px rgba(0,0,0,.5), 0 12px 26px -20px rgba(0,0,0,.9);
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--ground);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{margin:0;font-weight:600;line-height:1.2;text-wrap:balance}
+a{color:var(--accent);text-underline-offset:2px}
+button{font:inherit;color:inherit;font-family:var(--sans)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:4px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.wrap{max-width:1460px;margin:0 auto;padding:0 22px}
+@media(max-width:640px){.wrap{padding:0 14px}}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.muted{color:var(--muted)}
+.tiny{font-size:11.5px}
+.small{font-size:12.5px}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+
+/* header */
+header.top{position:sticky;top:0;z-index:60;background:color-mix(in srgb,var(--ground) 90%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.topbar{display:flex;align-items:flex-end;gap:18px;padding:14px 0 10px;flex-wrap:wrap}
+.brand{margin-right:auto;display:flex;flex-direction:column;gap:2px}
+.brand h1{font-family:var(--serif);font-size:21px;font-weight:600;letter-spacing:-.015em}
+.brand .sub{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.03em}
+.tools{display:flex;gap:7px;flex-wrap:wrap}
+.btn{border:1px solid var(--line2);background:var(--surface);border-radius:8px;padding:6px 11px;font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:border-color .15s,color .15s,background .15s;white-space:nowrap}
+.btn:hover{border-color:var(--accent);color:var(--accent)}
+.btn.on{background:var(--accentSoft);border-color:var(--accentLine);color:var(--accent);font-weight:600}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;padding-bottom:9px;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs button{border:0;background:transparent;padding:7px 13px;border-radius:8px;font-size:13.5px;font-weight:500;cursor:pointer;color:var(--muted);white-space:nowrap;transition:.15s}
+nav.tabs button:hover{color:var(--ink);background:var(--sunk)}
+nav.tabs button[aria-selected="true"]{background:var(--ink);color:var(--ground);font-weight:600}
+
+main{padding:26px 0 100px}
+.panel{display:none}
+.panel.active{display:block}
+.sechead{margin-bottom:18px;max-width:78ch}
+.sechead h2{font-family:var(--serif);font-size:27px;font-weight:600;letter-spacing:-.02em}
+.sechead p{margin:6px 0 0;color:var(--muted);font-size:13.5px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px}
+.pad{padding:18px}
+.legend{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:12px;color:var(--muted);align-items:center;margin-bottom:16px;padding:9px 13px;background:var(--surface2);border:1px solid var(--line);border-radius:10px}
+
+/* status chips */
+.chip{display:inline-flex;align-items:center;font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.07em;padding:2px 6px;border-radius:4px;white-space:nowrap;text-transform:uppercase}
+.c-q{background:var(--okSoft);color:var(--ok)}
+.c-c{background:var(--calcSoft);color:var(--calc)}
+.c-m{background:var(--missSoft);color:var(--miss)}
+.c-u{background:var(--warnSoft);color:var(--warn)}
+.val.s-m{color:var(--miss);font-style:italic}
+.val.s-u{color:var(--warn)}
+.src{display:none;margin-top:6px;padding:7px 10px;border-left:2px solid var(--accentLine);background:var(--surface3);border-radius:0 6px 6px 0;font-size:11.5px;color:var(--muted);white-space:pre-wrap;line-height:1.45}
+.src::before{content:"from the quotation \201C";}
+.src::after{content:"\201D";}
+body.showsrc .src,.src.open{display:block}
+.srcbtn{border:0;background:transparent;color:var(--faint);cursor:pointer;font-size:10px;font-family:var(--mono);padding:0 2px;margin-left:3px;line-height:1}
+.srcbtn:hover{color:var(--accent)}
+
+/* dashboard */
+.dashgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(345px,1fr));gap:18px}
+.pcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;padding:0;overflow:hidden;box-shadow:var(--shadow)}
+.pcard.st-short{border-color:var(--star);box-shadow:0 0 0 1px var(--star),var(--shadow)}
+.pcard.st-rejected{opacity:.62}
+.pcard .rebate{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 16px;background:var(--surface3);border-bottom:1px solid var(--line);font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase}
+.pcard .body{padding:16px;display:flex;flex-direction:column;gap:13px;flex:1}
+.pcard h3{font-family:var(--serif);font-size:20px;font-weight:600;letter-spacing:-.015em}
+.refline{font-size:12.5px;color:var(--muted);margin-top:3px}
+.refline b{color:var(--ink2);font-weight:600}
+.headrow{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.priceblk{text-align:right;flex:none}
+.priceblk .p{font-family:var(--mono);font-size:21px;font-weight:500;letter-spacing:-.02em;color:var(--ink);white-space:nowrap}
+.priceblk .ps{font-size:10.5px;color:var(--muted);margin-top:1px}
+.iglink{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;text-decoration:none;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:2px 8px;transition:.15s}
+.iglink:hover{color:var(--accent);border-color:var(--accentLine);background:var(--accentSoft)}
+.tiersel{display:inline-flex;background:var(--sunk);border-radius:8px;padding:2px;gap:2px;flex-wrap:wrap}
+.tiersel button{border:0;background:transparent;padding:4px 10px;border-radius:6px;font-size:11.5px;cursor:pointer;color:var(--muted);white-space:nowrap}
+.tiersel button[aria-pressed="true"]{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:0 1px 2px rgba(0,0,0,.1)}
+.speclist{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:12.5px;border-top:1px solid var(--line);padding-top:12px}
+.speclist dt{color:var(--muted)}
+.speclist dd{margin:0;font-family:var(--mono);font-size:12px}
+.taglist{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-size:11px;padding:2px 8px;border-radius:5px;background:var(--sunk);color:var(--ink2);line-height:1.5}
+.tag.pos{background:var(--okSoft);color:var(--ok)}
+.tag.neg{background:var(--missSoft);color:var(--miss)}
+.tag.warn{background:var(--warnSoft);color:var(--warn)}
+.cardfoot{margin-top:auto;padding:11px 16px;border-top:1px solid var(--line);background:var(--surface2);display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.sbtn{border:1px solid var(--line2);background:var(--surface);border-radius:6px;padding:3px 9px;font-size:11.5px;cursor:pointer;transition:.15s}
+.sbtn:hover{border-color:var(--accent)}
+.sbtn.on-shortlisted{background:var(--starSoft);border-color:var(--star);color:var(--star);font-weight:600}
+.sbtn.on-maybe{background:var(--maybeSoft);border-color:var(--maybe);color:var(--maybe);font-weight:600}
+.sbtn.on-rejected{background:var(--rejSoft);border-color:var(--rej);color:var(--rej);font-weight:600}
+.stars{display:inline-flex;gap:0;margin-left:auto}
+.stars button{border:0;background:transparent;cursor:pointer;font-size:15px;line-height:1;color:var(--line2);padding:0 1px}
+.stars button.lit{color:var(--star)}
+.stars button:hover{color:var(--star)}
+
+/* tables */
+.tablewrap{overflow:auto;border:1px solid var(--line);border-radius:12px;background:var(--surface);max-height:76vh;box-shadow:var(--shadow)}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:13px}
+th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+thead th{position:sticky;top:0;z-index:3;background:var(--surface2);font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:500;border-bottom:1px solid var(--line2)}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover td{background:var(--surface2)}
+tr.grouprow td{background:var(--sunk);color:var(--ink2);font-family:var(--mono);font-weight:500;font-size:10px;text-transform:uppercase;letter-spacing:.1em;padding:7px 14px}
+tr.grouprow:hover td{background:var(--sunk)}
+th.rowlab,td.rowlab{position:sticky;left:0;z-index:2;background:var(--surface);border-right:1px solid var(--line2);font-weight:600;font-size:12.5px;min-width:186px;max-width:210px}
+tbody tr:hover td.rowlab{background:var(--surface2)}
+thead th.rowlab{z-index:4;background:var(--surface2)}
+tr.grouprow td.rowlab{background:var(--sunk);border-right-color:var(--line2)}
+td.cell{min-width:215px;max-width:330px}
+.colhead .n{font-family:var(--serif);font-size:15px;color:var(--ink);text-transform:none;letter-spacing:-.01em;font-weight:600}
+.colhead .r{font-family:var(--sans);font-size:11px;color:var(--muted);text-transform:none;letter-spacing:0;margin-top:1px;font-weight:400}
+.colhead .pr{font-family:var(--mono);font-size:12.5px;color:var(--ink2);margin-top:3px;letter-spacing:0}
+
+/* selectors */
+.selbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.pill{border:1px solid var(--line2);background:var(--surface);border-radius:999px;padding:5px 13px;font-size:12.5px;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:.15s}
+.pill:hover{border-color:var(--accent)}
+.pill[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground)}
+.pill .sw{width:8px;height:8px;border-radius:2px;background:var(--accent);flex:none}
+.pill[aria-pressed="true"] .sw{background:var(--ground)}
+input[type=search],input[type=text],select,textarea{font:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line2);border-radius:8px;padding:7px 11px;width:100%;font-family:var(--sans)}
+textarea{resize:vertical;min-height:62px;line-height:1.5}
+.searchbox{max-width:270px}
+
+/* accordions */
+details.acc{border:1px solid var(--line);border-radius:12px;background:var(--surface);margin-bottom:12px;overflow:hidden;box-shadow:var(--shadow)}
+details.acc>summary{list-style:none;cursor:pointer;padding:14px 18px;display:flex;align-items:center;gap:13px;background:var(--surface);flex-wrap:wrap}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary:hover{background:var(--surface2)}
+details.acc>summary .nm{font-family:var(--serif);font-size:17px;font-weight:600}
+details.acc>summary .caret{margin-left:auto;color:var(--faint);transition:transform .2s;font-size:11px;font-family:var(--mono)}
+details.acc[open]>summary .caret{transform:rotate(90deg)}
+details.acc[open]>summary{border-bottom:1px solid var(--line);background:var(--surface2)}
+.accbody{padding:18px}
+.dl-sec{margin-bottom:22px}
+.dl-sec:last-child{margin-bottom:0}
+.dl-sec h4{font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--accent);margin-bottom:9px;padding-bottom:6px;border-bottom:1px solid var(--accentLine);font-weight:500}
+.dl-list{display:grid;gap:10px}
+.dl-item{display:grid;grid-template-columns:196px 1fr;gap:16px;font-size:13px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+.dl-item:last-child{border-bottom:0;padding-bottom:0}
+.dl-item .k{color:var(--muted);font-size:12.5px}
+@media(max-width:640px){.dl-item{grid-template-columns:1fr;gap:2px}.dl-item .k{font-weight:600;color:var(--ink2)}}
+
+/* notes */
+.notesgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.field label{display:block;font-family:var(--mono);font-size:10.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:5px}
+.savedot{font-family:var(--mono);font-size:10px;color:var(--ok);opacity:0;transition:opacity .35s}
+.savedot.show{opacity:1}
+
+/* questions */
+.qgrid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:880px){.qgrid{grid-template-columns:1fr}}
+ul.qlist{margin:0;padding:0;list-style:none;display:grid;gap:7px}
+ul.qlist li{display:flex;gap:9px;font-size:13px;align-items:flex-start;padding:9px 11px;border-radius:8px;background:var(--surface2);border:1px solid var(--line);line-height:1.45}
+ul.qlist li input[type=checkbox]{margin:3px 0 0;flex:none;accent-color:var(--accent);width:15px;height:15px}
+ul.qlist li.done .txt{text-decoration:line-through;color:var(--muted)}
+ul.qlist.confirmed li{background:var(--okSoft);border-color:transparent}
+ul.qlist.confirmed li .mk{color:var(--ok);font-family:var(--mono);flex:none}
+.qwhy{display:block;font-size:11.5px;color:var(--muted);margin-top:2px}
+
+/* pricing + best-for */
+.metricgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px}
+.metric{background:var(--surface2);border:1px solid var(--line);border-radius:10px;padding:11px 13px}
+.metric .m-l{font-family:var(--mono);font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;line-height:1.4}
+.metric .m-v{font-family:var(--mono);font-size:17px;margin-top:4px;letter-spacing:-.02em;color:var(--ink)}
+.metric .m-n{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+.bestlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}
+.best{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:0 11px 11px 0;padding:15px 17px}
+.best .cat{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--accent);margin-bottom:5px}
+.best h4{font-family:var(--serif);font-size:18px;font-weight:600}
+.best .win{font-family:var(--mono);font-size:13px;color:var(--ink2);margin-top:3px}
+.basis{font-size:12.5px;color:var(--muted);margin-top:9px;padding-top:9px;border-top:1px dashed var(--line);line-height:1.5}
+.banner{background:var(--warnSoft);border-left:3px solid var(--warn);border-radius:0 9px 9px 0;padding:11px 14px;font-size:12.5px;color:var(--ink2);margin-bottom:16px;line-height:1.5}
+.banner b{color:var(--warn)}
+.note-b{background:var(--accentSoft);border-left:3px solid var(--accent);border-radius:0 9px 9px 0;padding:11px 14px;font-size:12.5px;color:var(--ink2);margin-bottom:16px;line-height:1.5}
+.mmrow{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.mmrow:last-of-type{border-bottom:0}
+.mmrow label{display:flex;gap:10px;align-items:center;cursor:pointer;flex:1}
+.mmrow input{accent-color:var(--accent);width:15px;height:15px;flex:none}
+.mmtotal{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px;padding-top:13px;border-top:1px solid var(--line2)}
+.mmtotal .v{font-family:var(--mono);font-size:22px}
+.eventgrid{display:grid;gap:14px}
+.empty{padding:44px 20px;text-align:center;color:var(--muted);font-size:13.5px;background:var(--surface);border:1px dashed var(--line2);border-radius:12px}
+.footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);line-height:1.6}
+.filebadge{font-family:var(--mono);font-size:10.5px;background:var(--sunk);border-radius:4px;padding:1.5px 6px;color:var(--muted);word-break:break-all}
+.decrow{display:grid;grid-template-columns:1.4fr 1fr 1fr 2fr;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);align-items:center;font-size:13px}
+.decrow:last-child{border-bottom:0}
+@media(max-width:760px){.decrow{grid-template-columns:1fr 1fr;gap:8px}}
+@media(max-width:640px){
+  .topbar{gap:10px}
+  .brand h1{font-size:18px}
+  .sechead h2{font-size:22px}
+  .dashgrid{grid-template-columns:1fr}
+  .headrow{flex-direction:column;gap:8px}
+  .priceblk{text-align:left}
+  td.cell{min-width:190px}
+  th.rowlab,td.rowlab{min-width:132px;max-width:150px;font-size:11.5px;padding:9px 10px}
+  th,td{padding:9px 11px;font-size:12.5px}
+  .tablewrap{max-height:70vh}
+  .metricgrid{grid-template-columns:1fr 1fr}
+  .btn{padding:5px 9px;font-size:11.5px}
+}
+@media print{header.top,nav.tabs,.selbar,.tools{display:none}.panel{display:block!important}.tablewrap{max-height:none}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <h1>Six Wedding Quotations</h1>
+        <div class="sub">26&ndash;28 JAN 2027 &middot; MUMBAI &middot; 6 QUOTATIONS</div>
+      </div>
+      <div class="tools">
+        <button class="btn" id="srcToggle">&#8220;&#8221;&nbsp; Original wording</button>
+        <button class="btn" id="themeToggle">Theme</button>
+        <button class="btn" id="exportBtn">Export notes</button>
+        <button class="btn" id="importBtn">Import</button>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" id="tabs"></nav>
+  </div>
+</header>
+<main class="wrap" id="main"></main>
+<script>
+/* ============================================================
+   DATA MODEL
+   Every extracted value is [value, status, original-wording]
+   status: q = quoted verbatim from the PDF
+           c = calculated by Claude (never from the quotation)
+           m = not mentioned anywhere in the quotation
+           u = mentioned but ambiguous / contradictory
+   Any spec key that is absent renders as "Not mentioned".
+   ============================================================ */
+var INCL = "Included in package — individual event price not specified.";
+
+var PHOTOGRAPHERS = [
+
+/* ---------------- 1. EMOTIONS & CAMERA ---------------- */
+{
+ id:"ec", name:"Emotions & Camera", referral:"Paras + Aashi",
+ ig:"emotionsandcamera",
+ files:["Emotions & Camera_Paras+Aashi.pdf"],
+ blurb:"A team of three friends, two of them a couple. Quote titled “Photography & Cinematography Quote”.",
+ packages:[{
+  id:"ec-main", label:"All-Inclusive Package", price:340000, taxRate:null,
+  events:[
+   {key:"mandap", name:"Mandap Muhurat", date:"26 Jan 2027", scope:"Bride side + groom side",
+    crew:[{r:"Photographer",n:2,t:"p",note:"1 on each side"},{r:"Cinematographer",n:2,t:"v",note:"1 on each side"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"26th Jan’27– Mandap Muhurat Bride & Groom Side\n• 1 Photographers (Each Side)\n• 1 Cinematographers (Each Side)"},
+   {key:"sangeet", name:"Sagan (Evening)", date:"27 Jan 2027",
+    scope:"Called “Sagan” here, not Sangeet — but the video deliverables refer to “dance performances during the Sangeet”. Same date every other photographer calls Sangeet.",
+    scopeStatus:"u",
+    crew:[{r:"Photographer",n:2,t:"p"},{r:"Cinematographer",n:2,t:"v"},{r:"Assistant",n:1,t:"s"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"27th Jan’27– Sagan (Evening)\n• 2 Photographers\n• 2 Cinematographers\n• 1 Assistant"},
+   {key:"wedding", name:"Wedding Ceremony (Evening)", date:"28 Jan 2027",
+    crew:[{r:"Photographer",n:3,t:"p"},{r:"Cinematographer",n:3,t:"v"},{r:"Assistant",n:1,t:"s"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"28th Jan’27– Wedding Ceremony (Evening)\n• 3 Photographers\n• 3 Cinematographers\n• 1 Assistant"}
+  ],
+  spec:{
+   price:["₹3,40,000","q","Your Package (All Inclusive): ₹3.40,000"],
+   tax:["No GST line anywhere. The package is called “All Inclusive”, which may or may not mean tax-inclusive.","u","Your Package (All Inclusive): ₹3.40,000"],
+   totalPayable:["₹3,40,000 if “all inclusive” means tax included. Add ₹61,200 if 18% GST applies on top → ₹4,01,200.","c","Your Package (All Inclusive): ₹3.40,000"],
+   payment:["","m"],
+   travel:["Not stated for the wedding itself. Travel & stay are excluded only on the optional pre-wedding shoot.","u","Pre-Wedding Shoot: ₹50,000 per day + travel days (travel & stay not included)"],
+   numEvents:["3 — Mandap Muhurat, Sagan, Wedding Ceremony","q"],
+   eventsCovered:["Mandap Muhurat (26th, both sides) · Sagan (27th, evening) · Wedding Ceremony (28th, evening)","q","Location: 27th & 28th Jan’27 — but Team Deployment lists 26th, 27th and 28th"],
+   datesConflict:["The location line says “27th & 28th Jan’27” while the team deployment covers 26th, 27th and 28th. Confirm the 26th is in the package.","u","📍 Location: 27th & 28th Jan’27"],
+   numPhotographers:["2 · 2 · 3 across the three events (7 photographer slots)","q"],
+   numVideographers:["2 · 2 · 3 cinematographers across the three events (7 slots)","q"],
+   otherCrew:["1 assistant on the 27th and 1 on the 28th. No assistant listed for the 26th.","q","• 1 Assistant"],
+   hours:["","m"],
+   cameras:["","m"],
+   photography:["Yes — titled “Photography & Cinematography Quote”","q"],
+   traditionalPhoto:["Crew are listed only as “Photographers”. No traditional/candid split is stated.","u","• 3 Photographers"],
+   candidPhoto:["","m"],
+   editedPhotos:["600+ fully edited, high-resolution images from all covered events","q","Final Edited Photos: 600+ fully edited, high-resolution images from all covered events, delivered within 30 days"],
+   rawPhotos:["Yes — all RAW images shared via QR code within 4–6 days post-event","q","All RAW images will be shared via QR code within 4–6 days post-event"],
+   preWedding:["Not included. Add-on at ₹50,000 per day + travel days (travel & stay not included).","q","Pre-Wedding Shoot: ₹50,000 per day + travel days (travel & stay not included)"],
+   engagement:["","m"],
+   videography:["Yes — crew listed as Cinematographers","q"],
+   cinematography:["Yes — 2 · 2 · 3 cinematographers, cinematic trailer and cinematic film","q"],
+   traditionalVideo:["No separate traditional/full-ceremony video is offered. The only full-length item is a cinematic film of up to 50 minutes.","u","Full Film:-Upto 50 min Cinematic film delivered within 50–70 days"],
+   highlightVideo:["Highlight Trailer — 3–4 minute cinematic trailer, within 30 days","q","Highlight Trailer: A 3–4 minute cinematic trailer capturing the essence of your celebration, delivered within 30 Days"],
+   fullFilm:["Up to 50 min cinematic film, within 50–70 days","q","Full Film:-Upto 50 min Cinematic film delivered within 50–70 days"],
+   teaser:["The 3–4 min trailer is the only teaser included. A same-day trailer is a paid add-on.","u","Live Video Edit / Same Day Trailer: ₹30,000 per video"],
+   reels:["2 Instagram-ready reels, 30–40 seconds each, within 15–20 days","q","Social Media Reels:-2 Instagram-ready reels (30–40 seconds each), delivered within 15–20 days"],
+   sameDayEdit:["Not included. Add-on: Live Video Edit / Same Day Trailer ₹30,000 per video.","q","Live Video Edit / Same Day Trailer: ₹30,000 per video"],
+   drone:["Not included. Add-on at ₹12,000 per day.","q","Drone: ₹12,000 per day"],
+   liveStream:["","m"],
+   album:["No album is listed in the package, yet the add-on list says “Extra Album” — which implies one may be included. Must be confirmed.","u","Extra Album: ₹15,000 per album"],
+   albumSpec:["","m"],
+   albumPages:["Extra sheets ₹500 per sheet. Base page/sheet count never stated.","u","Extra Sheets: ₹500 per sheet"],
+   prints:["","m"], frames:["","m"], photoBooth:["","m"], usbDrive:["","m"],
+   digitalDelivery:["RAW images by QR code. Delivery method for the edited photos and films is not stated.","u","All RAW images will be shared via QR code within 4–6 days post-event"],
+   deliveryTimeline:["RAW photos 4–6 days · Reels 15–20 days · Sangeet dance coverage 15–20 days · Edited photos 30 days · Highlight trailer 30 days · Full film 50–70 days","q"],
+   revisions:["","m"],
+   otherDeliverables:["Full Coverage — complete video coverage of the dance performances during the Sangeet, delivered within 15–20 days","q","Full Coverage:-Complete video coverage of dance performances during the Sangeet, delivered within 15–20 days"],
+   exclusions:["Extra album, extra sheets, drone, social media coverage, pre-wedding shoot and same-day trailer are all outside the package.","q","Not Included in the Above Package (Optional Add-ons)"]
+  }
+ }],
+ addons:[
+  {n:"Extra album", c:"₹15,000 per album"},
+  {n:"Extra sheets", c:"₹500 per sheet"},
+  {n:"Drone", c:"₹12,000 per day"},
+  {n:"Social media coverage", c:"₹25,000 per day"},
+  {n:"Pre-wedding shoot", c:"₹50,000 per day + travel days", note:"Travel & stay not included"},
+  {n:"Live video edit / same-day trailer", c:"₹30,000 per video"}
+ ],
+ pros:["RAW photographs included and delivered fast — 4–6 days by QR code","Longest full film of any quote: up to 50 minutes","Largest crew on the wedding day alongside Match in Heaven (3 photographers + 3 cinematographers)","Dedicated coverage of the Sangeet dance performances as a separate deliverable"],
+ cons:["Lowest guaranteed edited photo count of the quotes that state one (600+)","No album, no drone, no same-day edit in the package","No GST position, no payment schedule and no coverage hours stated","Date line contradicts the team deployment"],
+ questions:{
+  gaps:[
+   {q:"Is the ₹3,40,000 inclusive of GST, or does 18% sit on top?", why:"The quote says “All Inclusive” but never mentions tax."},
+   {q:"Does the package cover the 26th? The location line only says 27th & 28th.", why:"The header date range contradicts the team deployment table."},
+   {q:"Is an album included at all? The add-on says “Extra Album”, which suggests a base album exists.", why:"No album appears in the deliverables list."},
+   {q:"How many hours of coverage per event?", why:"No hours anywhere in the quotation."},
+   {q:"What is the payment schedule and booking amount?", why:"No payment terms in the document."},
+   {q:"Are travel, stay and food for the crew included for the wedding days?", why:"Travel is only mentioned as excluded for the pre-wedding add-on."},
+   {q:"Of the photographers deployed, how many shoot candid vs traditional?", why:"Crew is listed only as “Photographers”."},
+   {q:"Is a full-length traditional video of each ceremony available?", why:"Only a cinematic film is offered; full ceremony documentation is not mentioned."},
+   {q:"How will the 600+ edited photos and the films actually be delivered?", why:"Only the RAW delivery method (QR code) is stated."},
+   {q:"Is “Sagan” on the 27th the same event as the Sangeet?", why:"The team table says Sagan; the video deliverables say Sangeet."},
+   {q:"How many cameras will the team bring?", why:"Not mentioned."}
+  ],
+  confirmed:["600+ edited high-resolution photos, in 30 days","All RAW images by QR code in 4–6 days","3–4 min highlight trailer in 30 days","2 Instagram reels (30–40s) in 15–20 days","Up to 50 min cinematic film in 50–70 days","Full video coverage of Sangeet dance performances in 15–20 days","Crew per event: 2/2/3 photographers and 2/2/3 cinematographers","Total package price ₹3,40,000","Drone ₹12,000 per day if you want it","Pre-wedding ₹50,000 per day if you want it"]
+ }
+},
+
+/* ---------------- 2. FOTOGRAF (KRUNAL JOSHI) ---------------- */
+{
+ id:"fg", name:"Fotograf", referral:"Tanisha Mehta", contactName:"Krunal Joshi",
+ ig:"fotograf.co.in",
+ files:["Fotograph - Krunal Joshi_Tanisha Mehta.pdf"],
+ blurb:"Quoted for 26·27·28 Jan 2027, Mumbai. Two tiers quoted — use the switch to compare either.",
+ packages:[
+ {
+  id:"fg-sig", label:"Signature Experience", price:422000, taxRate:0.18,
+  events:[
+   {key:"mandap", name:"Mandap Muhurat (B+G)", date:"26/01/27",
+    crew:[{r:"Photographer",n:2,t:"p"},{r:"Cinematographer",n:2,t:"v"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"26/01/27 · MANDAP MUHURAT (B+G) · PHOTOGRAPHERS 2 · CINEMATOGRAPHERS 2"},
+   {key:"sangeet", name:"Sangeet", date:"27/01/27",
+    crew:[{r:"Photographer",n:3,t:"p"},{r:"Cinematographer",n:3,t:"v"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"27/01/27 · SANGEET · PHOTOGRAPHERS 3 · CINEMATOGRAPHERS 3"},
+   {key:"wedding", name:"Wedding", date:"28/01/27",
+    crew:[{r:"Photographer",n:3,t:"p"},{r:"Cinematographer",n:3,t:"v"},{r:"Wedding director",n:1,t:"s",note:"creative direction, across the wedding"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"28/01/27 · WED · PHOTOGRAPHERS 3 · CINEMATOGRAPHERS 3\nCREATIVE DIRECTION INCLUDED — 1 WEDDING DIRECTOR GUIDING KEY MOMENTS, COUPLE PORTRAITS AND OVERALL STORYTELLING FLOW."}
+  ],
+  spec:{
+   price:["₹4,22,000 excluding GST","q","INR 422,000/- EXCLUDING GST 18%"],
+   tax:["18% GST, explicitly excluded from the quoted figure","q","EXCLUDING GST 18%"],
+   totalPayable:["₹4,97,960 — ₹4,22,000 + ₹75,960 GST at 18%","c","INR 422,000/- EXCLUDING GST 18%"],
+   payment:["40% booking amount to block the dates (non-refundable), 60% balance. The same page says the balance is due “one day prior to the wedding” in one place and “on or before the wedding” in another.","u","BOOKING AMOUNT 40% ... BALANCE 60% To be cleared one day prior to the wedding / To be cleared on or Before the wedding"],
+   travel:["Team travel is covered by Fotograf; stay and food are additional. The terms then say that for events outside Mumbai the client arranges stay, meals and permissions and covers all travel-associated costs — the two statements pull in different directions.","u","TEAM TRAVEL IS ON US ! STAY & FOOD WILL BE ADDITIONAL\n\nTravel & Stay: For events outside Mumbai, the client arranges stay, meals, and permissions. While Fotograf manages travel logistics, all associated costs are covered by the client."],
+   numEvents:["3 — Mandap Muhurat, Sangeet, Wedding","q"],
+   eventsCovered:["Mandap Muhurat (B+G) 26/01/27 · Sangeet 27/01/27 · Wedding 28/01/27","q"],
+   numPhotographers:["2 · 3 · 3 across the three events (8 photographer slots)","q"],
+   numVideographers:["2 · 3 · 3 cinematographers across the three events (8 slots)","q"],
+   otherCrew:["1 wedding director for creative direction. Assistants are promised for every major event but the number is never given.","u","Dedicated assistants support every major event for smooth execution and technical precision."],
+   hours:["No hours are stated. Extensions or extra coverage such as after-parties are billed at ₹50,000 for up to 2 hours.","u","Extensions or extra coverage (after-parties/lounge events) are billed at INR 50,000 for up to 2 hours."],
+   cameras:["","m"],
+   photography:["Yes","q"],
+   traditionalPhoto:["Full-length traditional documentation is a paid add-on at ₹20,000 total for all listed events.","q","TRADITIONAL VIDEOS — Full-length traditional documentation of all listed events for complete family viewing. INR 20,000/- Total for all listed events"],
+   candidPhoto:["Crew is listed only as “Photographers”. No traditional/candid split is given.","u"],
+   editedPhotos:["Up to 2,200 edited images, shared via an AI-enabled gallery, with advanced colour grading. Plus a curated preview of up to 300 images within 24–48 hours.","q","upto 2200 edited images shared via AI enabled gallery\nAdvanced colour grading\n24-48 hours curated preview (upto 300)"],
+   rawPhotos:["Explicitly excluded.","q","Final edited assets are delivered per the agreed timeline; raw files are excluded."],
+   preWedding:["Not included. Icebreaker session / pre-wedding shoot, 2–4 hours, ₹30,000 per session.","q","ICEBREAKER SESSION / PRE-WEDDING SHOOT — A relaxed 2 to 4 hour couple session designed to build comfort, chemistry and natural ease before the wedding. INR 30,000/- Per session"],
+   engagement:["","m"],
+   videography:["Yes","q"],
+   cinematography:["Yes — 8 cinematographer slots, story-driven narrative structure","q","Story driven narrative structure"],
+   traditionalVideo:["Not in the package. Add-on at ₹20,000 total for all listed events.","q","TRADITIONAL VIDEOS ... INR 20,000/- Total for all listed events"],
+   highlightVideo:["12–25 minute feature film","q","12–25 min feature film"],
+   fullFilm:["12–25 min feature film. A full traditional record of every ceremony is a separate ₹20,000 add-on.","q","12–25 min feature film"],
+   teaser:["1–3 minute teaser covering the combined events","q","1-3 mins teaser ( Combined events)"],
+   reels:["3 × 30-second reels, reference based. Extra reels ₹6,000 each.","q","30s Reels x3 (reference based)"],
+   sameDayEdit:["Not included. ₹30,000 for a 3-day event structure.","q","SAME DAY VIDEO EDIT — A beautifully edited wedding Teaser / Trailer showcased on the same day during your celebration. INR 30,000/- for 3 days events structure"],
+   drone:["Not included. ₹20,000 per day.","q","DRONE — Aerial visuals capturing the venue, entries and scale of the celebration. INR 20,000/- per day"],
+   liveStream:["","m"],
+   album:["Not included. Photobook album ₹20,000 per album.","q","PHOTOBOOK ALBUM — A handcrafted 12x24 album preserving your wedding story in a timeless flow. INR 20,000/- PER ALBUM (150 pictures) (upto 40 sheets)"],
+   albumSpec:["12x24 handcrafted photobook, 150 pictures, up to 40 sheets — the only quotation that specifies album size and capacity","q","INR 20,000/- PER ALBUM (150 pictures) (upto 40 sheets)"],
+   albumPages:["Additional pages if the selection exceeds 150 pictures: ₹10,000 for up to 10 pages, ₹20,000 for up to 20 pages","q","ADDITIONAL PAGES IN THE ALBUM — Applicable if selection is above 150 pictures. INR 10,000/- for upto 10 pages / INR 20,000/- for upto 20 pages"],
+   prints:["","m"], frames:["","m"], photoBooth:["","m"], usbDrive:["","m"],
+   digitalDelivery:["AI-enabled online gallery for photos. Project data is archived for 6 months after delivery.","q","All project data will be archived and kept for 6 months post-delivery."],
+   deliveryTimeline:["Curated preview (up to 300 photos) 24–48 hours · All photos 3–4 weeks · Films 6–9 weeks · A detailed schedule follows on booking","q","24-48 hours curated preview (upto 300)\n3-4 weeks Delivery\n6-9 weeks Delivery"],
+   revisions:["","m"],
+   otherDeliverables:["Intimate Beginnings — getting-ready portraits, included with Signature. Creative Direction — on-ground supervision of key moments, couple portraits and family flow, included with Signature. Speeches and performances shared separately.","q","INTIMATE BEGINNINGS — Getting-ready portraits capturing quiet moments, details and emotions before the celebration. Included with the Signature Experience\nSpeeches & performances shared seperately"],
+   exclusions:["RAW files excluded. Album, drone, traditional video, same-day edit, pre-wedding, 4K upgrade and extra reels all cost extra. Booking amount non-refundable. Portfolio rights reserved — an NDA costs an extra 20%. Data kept only 6 months post-delivery.","q","We reserve portfolio rights for promotional use. Complete privacy via a Non-Disclosure Agreement is available for an additional 20% fee."]
+  }
+ },
+ {
+  id:"fg-cla", label:"Classic Experience", price:310000, taxRate:0.18,
+  events:[
+   {key:"mandap", name:"Mandap Muhurat (B+G)", date:"26/01/27",
+    crew:[{r:"Photographer",n:2,t:"p"},{r:"Cinematographer",n:2,t:"v"}],
+    hours:["","m"], price:[INCL,"q"], quote:"26/01/27 · MANDAP MUHURAT (B+G) · 2 · 2"},
+   {key:"sangeet", name:"Sangeet", date:"27/01/27",
+    crew:[{r:"Photographer",n:2,t:"p"},{r:"Cinematographer",n:2,t:"v"}],
+    hours:["","m"], price:[INCL,"q"], quote:"27/01/27 · SANGEET · 2 · 2"},
+   {key:"wedding", name:"Wedding", date:"28/01/27",
+    crew:[{r:"Photographer",n:2,t:"p"},{r:"Cinematographer",n:2,t:"v"}],
+    hours:["","m"], price:[INCL,"q"], quote:"28/01/27 · WED · 2 · 2"}
+  ],
+  spec:{
+   price:["₹3,10,000 excluding GST","q","INR 310,000/- EXCLUDING GST 18%"],
+   tax:["18% GST, explicitly excluded from the quoted figure","q","EXCLUDING GST 18%"],
+   totalPayable:["₹3,65,800 — ₹3,10,000 + ₹55,800 GST at 18%","c","INR 310,000/- EXCLUDING GST 18%"],
+   payment:["40% booking amount to block the dates (non-refundable), 60% balance. The page states both “one day prior to the wedding” and “on or before the wedding”.","u","BOOKING AMOUNT 40% ... BALANCE 60%"],
+   travel:["Team travel is covered by Fotograf; stay and food are additional. The terms also say the client covers all travel-associated costs outside Mumbai.","u","TEAM TRAVEL IS ON US ! STAY & FOOD WILL BE ADDITIONAL"],
+   numEvents:["3 — Mandap Muhurat, Sangeet, Wedding","q"],
+   eventsCovered:["Mandap Muhurat (B+G) 26/01/27 · Sangeet 27/01/27 · Wedding 28/01/27","q"],
+   numPhotographers:["2 · 2 · 2 across the three events (6 photographer slots)","q"],
+   numVideographers:["2 · 2 · 2 cinematographers across the three events (6 slots)","q"],
+   otherCrew:["Assistants promised for every major event, number not given. No wedding director — creative direction is Signature-only.","u","Dedicated assistants support every major event for smooth execution and technical precision."],
+   hours:["No hours stated. Extensions billed at ₹50,000 for up to 2 hours.","u","Extensions or extra coverage (after-parties/lounge events) are billed at INR 50,000 for up to 2 hours."],
+   cameras:["","m"],
+   photography:["Yes","q"],
+   traditionalPhoto:["Crew listed only as “Photographers”. No traditional/candid split.","u"],
+   candidPhoto:["","m"],
+   editedPhotos:["Up to 1,500 edited images via AI-enabled gallery, plus a 100-image curated preview in 48–72 hours. Advanced colour grading is listed only under Signature.","q","upto 1500 edited images shared via AI enabled gallery\n48-72 hours curated preview (100)"],
+   rawPhotos:["Explicitly excluded.","q","raw files are excluded"],
+   preWedding:["Not included. ₹30,000 per session.","q","INR 30,000/- Per session"],
+   engagement:["","m"],
+   videography:["Yes","q"],
+   cinematography:["Yes — 6 cinematographer slots","q"],
+   traditionalVideo:["Full ceremony edit (traditional video) is included in Classic — this is the one thing Classic has that Signature does not list.","q","full ceremony edit (Traditional Video)"],
+   highlightVideo:["No feature film is listed for Classic. The teaser plus a full ceremony edit are what you get.","u","1-3 min teaser (Combined events)\nfull ceremony edit (Traditional Video)"],
+   fullFilm:["Full ceremony edit (traditional video). The 12–25 minute feature film is Signature-only.","q","full ceremony edit (Traditional Video)"],
+   teaser:["1–3 minute teaser covering the combined events","q","1-3 min teaser (Combined events)"],
+   reels:["3 × 30-second reels, reference based","q","30s Reels x3 (reference based)"],
+   sameDayEdit:["Not included. ₹30,000 for a 3-day event structure.","q"],
+   drone:["Not included. ₹20,000 per day.","q"],
+   liveStream:["","m"],
+   album:["Not included. Photobook album ₹20,000 per album.","q"],
+   albumSpec:["12x24 handcrafted photobook, 150 pictures, up to 40 sheets","q","INR 20,000/- PER ALBUM (150 pictures) (upto 40 sheets)"],
+   albumPages:["₹10,000 for up to 10 extra pages, ₹20,000 for up to 20","q"],
+   prints:["","m"], frames:["","m"], photoBooth:["","m"], usbDrive:["","m"],
+   digitalDelivery:["AI-enabled online gallery. Data archived 6 months post-delivery.","q"],
+   deliveryTimeline:["Curated preview (100 photos) 48–72 hours · All photos 3–4 weeks · Films 6–9 weeks","q"],
+   revisions:["","m"],
+   otherDeliverables:["Creative direction and Intimate Beginnings are NOT part of Classic — the enhancements table marks both “Included with the Signature Experience”. Advanced colour grading and separately-shared speeches are also Signature-only.","q","Included with the Signature Experience"],
+   exclusions:["RAW files excluded. Album, drone, same-day edit, pre-wedding, 4K upgrade extra. Creative direction, intimate beginnings, advanced colour grading, feature film and separate speeches are Signature-only. NDA costs 20% extra.","q"]
+  }
+ }],
+ addons:[
+  {n:"Icebreaker session / pre-wedding shoot", c:"₹30,000 per session", note:"2–4 hour couple session"},
+  {n:"Photobook album", c:"₹20,000 per album", note:"12x24, 150 pictures, up to 40 sheets"},
+  {n:"Additional album pages", c:"₹10,000 up to 10 pages · ₹20,000 up to 20 pages", note:"If selection exceeds 150 pictures"},
+  {n:"Drone", c:"₹20,000 per day"},
+  {n:"Same-day video edit", c:"₹30,000", note:"For a 3-day event structure"},
+  {n:"Instagram reel (30–45s)", c:"₹6,000 per reel", note:"Above the 3 reels already included"},
+  {n:"4K cinematic experience upgrade", c:"₹49,000", note:"Teaser, trailer and full film in 4K Ultra HD"},
+  {n:"Traditional videos", c:"₹20,000 total", note:"Full-length documentation of all listed events. Already included in Classic."},
+  {n:"Intimate beginnings (getting-ready portraits)", c:"Included with Signature"},
+  {n:"Creative direction", c:"Included with Signature"},
+  {n:"Extra coverage / after-party", c:"₹50,000 per 2 hours"},
+  {n:"Non-disclosure agreement", c:"+20% of the fee", note:"Otherwise Fotograf reserves portfolio rights"}
+ ],
+ pros:["The only quotation that states its tax position plainly (18% GST on top)","Highest edited photo count on Signature — up to 2,200, with advanced colour grading","Only quote with a named creative/wedding director and a defined process","Only quote that specifies album size and capacity (12x24, 150 pictures, up to 40 sheets)","Fastest preview turnaround: up to 300 curated images within 24–48 hours","Team travel covered by the studio"],
+ cons:["Most expensive quote by a wide margin once GST is added (₹4,97,960 on Signature)","RAW files explicitly excluded — the only quote that rules them out","Traditional full-length video costs ₹20,000 extra on Signature","Booking amount is non-refundable and payments cannot be withheld over delivery concerns","Portfolio rights reserved unless you pay 20% more for an NDA","Project data kept only 6 months after delivery","Balance due date is stated two different ways on the same page"],
+ questions:{
+  gaps:[
+   {q:"Is the balance due one day before the wedding or on/before the wedding day?", why:"The payment page states both on the same slide."},
+   {q:"Travel: the pricing page says team travel is on you, the terms say we cover all travel costs outside Mumbai. Which applies for a Mumbai wedding?", why:"Direct contradiction between the pricing page and the T&C page."},
+   {q:"How many assistants come to each event?", why:"“Dedicated assistants” is stated but never quantified."},
+   {q:"How many hours of coverage per event before the ₹50,000 extension charge starts?", why:"No baseline hours are given, only the overage rate."},
+   {q:"Does Classic include a highlight/feature film at all, or only the teaser and full ceremony edit?", why:"The Classic list omits the feature film that Signature has."},
+   {q:"Can RAW files be bought at any price?", why:"They are excluded outright with no add-on offered."},
+   {q:"What happens to the files after the 6-month archive window?", why:"The terms say data is kept only 6 months post-delivery."},
+   {q:"Of the photographers on each day, how many are candid vs traditional?", why:"Only a single “Photographers” count is given."},
+   {q:"What is the stage-wise payment plan for a booking this far in advance?", why:"The terms promise one for 8–12 month bookings but do not state it."},
+   {q:"How many cameras will be on site?", why:"Not mentioned."}
+  ],
+  confirmed:["Price and tax: ₹4,22,000 (Signature) or ₹3,10,000 (Classic), plus 18% GST","Crew per event, stated in a table for both tiers","Up to 2,200 edited images (Signature) or 1,500 (Classic)","Curated preview: 300 images in 24–48h (Signature) / 100 in 48–72h (Classic)","Photos in 3–4 weeks, films in 6–9 weeks","1–3 min teaser and 3 × 30s reels in both tiers","12–25 min feature film in Signature","Full ceremony traditional edit included in Classic","Album spec and price if you add one","Booking 40% / balance 60%","RAW files are excluded","NDA available at +20%"]
+ }
+},
+
+/* ---------------- 3. THE IMMORTAL MEMORIES ---------------- */
+{
+ id:"im", name:"The Immortal Memories", referral:"Meethi + Diya", contactName:"Viral Jagani (Founder & Director)",
+ ig:"theimmortalmemories",
+ files:["Immortal Memories_Meethi+Diya.pdf"],
+ blurb:"Hiranandani Powai, Mumbai. Founded 2018. The only quotation that states coverage hours.",
+ packages:[{
+  id:"im-main", label:"Wedding Quotation", price:325000, taxRate:null,
+  events:[
+   {key:"mandap", name:"Mandap Muhurat (both sides)", date:"26 Jan 2027",
+    crew:[{r:"Traditional photographer",n:1,t:"p"},{r:"Traditional videographer",n:1,t:"v"}],
+    hours:["2–4 hours","q"], price:[INCL,"q"],
+    quote:"26th Jan 2027 Mandap Muhurat(Both Sides) — 1TP + 1TV — 2-4 HOURS"},
+   {key:"sangeet", name:"Sangeet", date:"27 Jan 2027",
+    scope:"The quotation lists one crew line covering the 27th AND 28th together. It is not stated whether this team is deployed on each day or split across the two.",
+    scopeStatus:"u",
+    crew:[{r:"Traditional photographer",n:1,t:"p"},{r:"Traditional videographer",n:1,t:"v"},{r:"Candid photographer",n:2,t:"p"},{r:"Cinematographer",n:2,t:"v"},{r:"Assistant",n:1,t:"s"}],
+    hours:["6–8 hours","q"], price:[INCL,"q"],
+    quote:"27th & 28th Jan 2027 Sangeet & Wedding — 1TP + 1TV + 2CP + 2C + 1A — 6-8 HOURS"},
+   {key:"wedding", name:"Wedding", date:"28 Jan 2027",
+    scope:"Same crew line as the Sangeet — quoted jointly for both days.",
+    scopeStatus:"u",
+    crew:[{r:"Traditional photographer",n:1,t:"p"},{r:"Traditional videographer",n:1,t:"v"},{r:"Candid photographer",n:2,t:"p"},{r:"Cinematographer",n:2,t:"v"},{r:"Assistant",n:1,t:"s"}],
+    hours:["6–8 hours","q"], price:[INCL,"q"],
+    quote:"27th & 28th Jan 2027 Sangeet & Wedding — 1TP + 1TV + 2CP + 2C + 1A — 6-8 HOURS"}
+  ],
+  spec:{
+   price:["₹3,25,000","q","COMMERCIALS INR 3,25,000/-"],
+   tax:["","m"],
+   totalPayable:["₹3,25,000 as quoted. If 18% GST applies it would add ₹58,500 → ₹3,83,500, but the quotation says nothing about tax.","c","INR 3,25,000/-"],
+   payment:["50% booking · 30% one month before the event · 10% on delivery of the photo link · 10% on delivery of the video links","q","BOOKING AMOUNT 50%\n30% ONE MONTH BEFORE THE EVENT\n10% AT THE TIME OF DELIVERY OF PHOTOS LINK BALANCE\n10% AT THE TIME OF DELIVERY OF VIDEO LINKS"],
+   travel:["Outstation travel and accommodation are arranged by the client. Crew eat with the guests at every event.","q","Outstation Travel needs to be arranged by Client. For Outstation Accomodation has to be arranged by Client. For all the Events, all of the crew Member eats with guests only."],
+   numEvents:["3 — Mandap Muhurat, Sangeet, Wedding","q"],
+   eventsCovered:["Mandap Muhurat (both sides) 26 Jan · Sangeet & Wedding 27–28 Jan","q"],
+   numPhotographers:["1 on the 26th. 3 on the Sangeet/Wedding line (1 traditional + 2 candid) — quoted once for both days.","u","1TP + 1TV + 2CP + 2C + 1A"],
+   numVideographers:["1 on the 26th. 3 on the Sangeet/Wedding line (1 traditional videographer + 2 cinematographers) — quoted once for both days.","u","1TP + 1TV + 2CP + 2C + 1A"],
+   otherCrew:["1 assistant on the Sangeet/Wedding line. The legend also defines D = Drone and M = Mixer, but neither appears in the deployment.","q","TP = TRADITIONAL PHOTOGRAPHER, TV = TRADITIONAL VIDEOGRAPHER, CP = CANDID PHOTOGRAPHER, C = CINEMATOGRAPHER, D = DRONE, M = MIXER, A = ASSISTANT"],
+   hours:["2–4 hours for the Mandap Muhurat; 6–8 hours for Sangeet & Wedding. The only quotation that commits to hours.","q","2-4 HOURS / 6-8 HOURS"],
+   cameras:["","m"],
+   photography:["Yes — traditional and candid, split explicitly","q"],
+   traditionalPhoto:["1 traditional photographer at every event","q","1TP"],
+   candidPhoto:["2 candid photographers on the Sangeet/Wedding line. None on the 26th.","q","2CP"],
+   editedPhotos:["1,000 high-resolution edited images","q","1000 HIGH RESOLUTION EDITED IMAGES"],
+   rawPhotos:["Yes — all other RAW photographs will be given. A 4TB SSD with the raw data is a separate ₹30,000 add-on.","q","+ All OTHER RAW PHOTOGRAPHS WILL BE GIVEN"],
+   preWedding:["","m"],
+   engagement:["","m"],
+   videography:["Yes — traditional videography and cinematography, split explicitly","q"],
+   cinematography:["2 cinematographers on the Sangeet/Wedding line","q","2C"],
+   traditionalVideo:["4–6 hours of traditional video, in 4K","q","4-6 HRS TRADITIONAL VIDEO"],
+   highlightVideo:["10 minute highlight film","q","10 MINS HIGHLIGHT FILM"],
+   fullFilm:["4–6 hrs traditional video is the full-length record. A long-form cinematic film is not offered separately.","q","4-6 HRS TRADITIONAL VIDEO"],
+   teaser:["2–3 minute trailer","q","2-3 MINS TRAILER"],
+   reels:["2 reels, 4K","q","2 Reels"],
+   sameDayEdit:["","m"],
+   drone:["Not deployed in the package. Drone pilot ₹20,000 per day. Drone flights are subject to DGCA and government rules and the client must get venue and local permissions.","q","DRONE PILOT INR 20,000 PER DAY\nDrones are subject to DCGA & government regulations. The client has the responsibility of obtaining permissions to fly drone from the event venue and local authorities."],
+   liveStream:["","m"],
+   album:["Not included. ₹20,000 per album.","q","ALBUM INR 20,000 PER ALBUM"],
+   albumSpec:["","m"], albumPages:["","m"],
+   prints:["","m"], frames:["","m"], photoBooth:["","m"],
+   usbDrive:["Not included. Raw data on a 4TB SSD is ₹30,000.","q","RAW DATA WITH 4TB SSD INR 30,000"],
+   digitalDelivery:["Photos via an AI face-recognition link, active for 2 months. Videos via a Google Drive link, active for 2 months. Note the 2-month window on both.","q","Images will be delivered through AI based face recognition link which will be active for 2 months.\nAll videos will be delivered via a cloud based Google drive Link online platform which will be active for 2 months."],
+   deliveryTimeline:["Edited photos 30 days · Wedding films 60–90 days","q","EDITED PHOTOS 30 DAYS / WEDDING FILMS 60-90DAYS"],
+   revisions:["No revisions on the edited photos. One round on the wedding films, to be raised within 7 days of delivery.","q","EDITED PHOTOS — NA · WEDDING FILMS — 1 ROUND WITHIN 7 DAYS OF DELIVERY"],
+   otherDeliverables:["All videos delivered in 4K resolution","q","4K Resolution Videos"],
+   exclusions:["Proposal valid 30 days. Dates are not held until the booking amount lands. Copyright stays with the studio and content may be used for promotion — an NDA costs 20% extra. Outstation travel and accommodation are the client's. Drone permissions are the client's.","q","This proposal is valid for 30 days\nNo dates are blocked till the booking amount is received"]
+  }
+ }],
+ addons:[
+  {n:"Additional photographer", c:"₹20,000 per day"},
+  {n:"Additional cinematographer", c:"₹30,000 per day"},
+  {n:"Drone pilot", c:"₹20,000 per day"},
+  {n:"Album", c:"₹20,000 per album"},
+  {n:"Raw data with 4TB SSD", c:"₹30,000"},
+  {n:"Non-disclosure agreement", c:"+20% of the fee"}
+ ],
+ pros:["The only quotation that commits to coverage hours per event (2–4 h and 6–8 h)","Clearest crew breakdown — traditional vs candid vs cinematographer spelled out","1,000 edited photos plus all RAW photographs included","Most complete video set in a base package: 2 reels, 2–3 min trailer, 10 min highlight film and 4–6 hrs of traditional video, all in 4K","Only quote offering a defined revision round on the films","Payment spread over four milestones, two of them tied to actual delivery"],
+ cons:["The Sangeet and Wedding crew is quoted as one line for both days — the actual per-day deployment is unconfirmed","Smallest crew on the Mandap day: one photographer, one videographer","No tax position stated","Delivery links expire after 2 months — you must download everything in that window","No album, no drone, no pre-wedding in the package","Copyright stays with the studio unless you pay 20% more"],
+ questions:{
+  gaps:[
+   {q:"Is the 1TP+1TV+2CP+2C+1A team present on BOTH the 27th and the 28th, or split across the two days?", why:"One crew line covers both dates."},
+   {q:"Is GST charged on top of ₹3,25,000?", why:"No tax line anywhere in the quotation."},
+   {q:"What happens after the 2-month link expiry — can the gallery be re-opened, and at what cost?", why:"Both photo and video links are stated as active for 2 months only."},
+   {q:"Is the 6–8 hour window per day, or across both days?", why:"Hours are attached to a joint two-day line."},
+   {q:"Is a cinematic long-form film available, or is the 4–6 hr traditional video the only long-form output?", why:"Only a 10-min highlight and a traditional video are listed."},
+   {q:"Are the RAW photographs delivered through the same 2-month link, or do we need the ₹30,000 SSD to actually keep them?", why:"RAW is promised but the delivery route is not stated."},
+   {q:"Is a pre-wedding or engagement shoot available, and at what price?", why:"Neither is mentioned in the quotation or the add-ons."},
+   {q:"What is the album specification — size, number of pages, paper?", why:"Only a price of ₹20,000 is given."},
+   {q:"How many cameras will the crew bring?", why:"Not mentioned."},
+   {q:"Is there any same-day edit option?", why:"Not mentioned."}
+  ],
+  confirmed:["₹3,25,000 total","Payment: 50% / 30% / 10% / 10%","2–4 hours on the Mandap day, 6–8 hours on Sangeet & Wedding","1,000 edited high-resolution photos + all RAW photographs","2 reels, 2–3 min trailer, 10 min highlight film, 4–6 hrs traditional video, all 4K","Photos in 30 days, films in 60–90 days","One revision round on films within 7 days","Photos by AI face-recognition link, videos by Google Drive — both live 2 months","Crew roles split out as traditional / candid / cinematographer / assistant","Add-on rates for extra photographer, cinematographer, drone, album and SSD","Outstation travel and stay are the client's","Proposal valid 30 days"]
+ }
+},
+
+/* ---------------- 4. MATCH IN HEAVEN ---------------- */
+{
+ id:"mh", name:"Match in Heaven", referral:"Aayushi + Haresh",
+ ig:"matchinheaven_wedding",
+ files:["Match in Heaven_Aayushi+Haresh.pdf"],
+ blurb:"“Luxury Wedding Photography & Films.” Largest crew of any quote, and the only one with a fully priced pre-wedding package. Contact: 9022590837.",
+ packages:[{
+  id:"mh-main", label:"Wedding Proposal", price:260000, taxRate:null,
+  events:[
+   {key:"mandap", name:"Mandap Mahurat", date:"Day 1 — date left blank in the PDF", dateStatus:"u",
+    crew:[{r:"Photographer",n:1,t:"p"},{r:"Videographer",n:1,t:"v"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"DAY 1 — MANDAP MAHURAT (DATE / YEAR) — TEAM: 1 Photographer, 1 Videographer"},
+   {key:"sangeet", name:"Sangeet", date:"Day 2 — date left blank in the PDF", dateStatus:"u",
+    crew:[{r:"Photographer",n:2,t:"p"},{r:"Candid photographer",n:1,t:"p"},{r:"Videographer",n:2,t:"v"},{r:"Cinematographer",n:1,t:"v"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"DAY 2 — SANGEET — TEAM: 2 Photographers, 1 Candid Photographer, 2 Videographers, 1 Cinematographer"},
+   {key:"wedding", name:"Wedding", date:"Day 3 — date left blank in the PDF", dateStatus:"u",
+    crew:[{r:"Photographer",n:2,t:"p"},{r:"Candid photographer",n:2,t:"p"},{r:"Guest photographer",n:1,t:"p"},{r:"Videographer",n:2,t:"v"},{r:"Cinematographer",n:2,t:"v"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"DAY 3 — WEDDING — TEAM: 2 Photographers, 2 Candid Photographers, 2 Videographers, 2 Cinematographers, 1 Guest Photographer"},
+   {key:"prewedding", name:"Pre-Wedding Experience", date:"1 day shoot — add-on", addon:true,
+    crew:[{r:"Candid photographer",n:1,t:"p"},{r:"Cinematographer",n:1,t:"v"},{r:"Social media content creator",n:1,t:"s",note:"Insta reel content"},{r:"Assistant",n:1,t:"s"}],
+    hours:["","m"], price:["₹50,000 for a 1 day shoot — but the additional-services list on the pricing page says pre-wedding “starts from ₹10,000”. The two figures do not agree.","u"],
+    deliverables:["100 professionally edited photos","Countdown announcement image","Save the date image","1 minute cinematic teaser","3–4 minutes highlight film","4–5 Instagram reels"],
+    quote:"PRE WEDDING EXPERIENCE — CREATIVE TEAM: 1 Candid Photographer, 1 Cinematographer, 1 Social Media Content Creator (Insta Reel Content), 1 Assistant\nDELIVERABLES: 100 Professionally Edited Photos, Countdown Announcement Image, Save The Date Image, 1 Minute Cinematic Teaser, 3–4 Minutes Highlight Film, 4–5 Instagram Reels\nPRICING ₹50,000 (1 DAY SHOOT)\nADDITIONAL COST: Location Charges, Travelling Expenses, Food Expenses for the Team, Drone Shoot"}
+  ],
+  spec:{
+   price:["₹2,60,000","q","TOTAL PRICE ₹2,60,000"],
+   tax:["","m"],
+   totalPayable:["₹2,60,000 as quoted. If 18% GST applies it would add ₹46,800 → ₹3,06,800, but no tax is mentioned.","c","TOTAL PRICE ₹2,60,000"],
+   payment:["","m"],
+   travel:["Not stated for the wedding days. On the pre-wedding add-on, location charges, travelling expenses, food for the team and drone are all additional.","u","ADDITIONAL COST: Location Charges, Travelling Expenses, Food Expenses for the Team, Drone Shoot"],
+   numEvents:["3 in the package — Mandap Mahurat, Sangeet, Wedding. Plus a pre-wedding shoot as a priced add-on.","q"],
+   eventsCovered:["Mandap Mahurat (Day 1) · Sangeet (Day 2) · Wedding (Day 3). The dates are placeholders — the PDF literally prints “(DATE / YEAR)”.","u","DAY 1 MANDAP MAHURAT (DATE / YEAR)"],
+   numPhotographers:["1 · 3 · 5 across the three days (9 photographer slots, including 3 candid and 1 guest photographer) — the largest photography crew of any quote","q"],
+   numVideographers:["1 · 3 · 4 across the three days (8 slots: 5 videographers and 3 cinematographers)","q"],
+   otherCrew:["A guest photographer on the wedding day. No assistants listed for the wedding days; the pre-wedding add-on has 1 assistant and 1 social media content creator.","q","1 Guest Photographer"],
+   hours:["Not stated for the package. The add-on rates are priced in 4-hour and 10-hour blocks, which implies a block structure but does not define the package's own hours.","u","Photographer (4 Hours) - ₹6,000 | (10 Hours) - ₹12,000"],
+   cameras:["","m"],
+   photography:["Yes — traditional, candid and a guest photographer","q"],
+   traditionalPhoto:["Listed as “Photographers”, separate from the candid photographers: 1 · 2 · 2","q"],
+   candidPhoto:["1 candid photographer at the Sangeet, 2 at the Wedding. None on Day 1.","q","1 Candid Photographer / 2 Candid Photographers"],
+   editedPhotos:["“All photos professionally edited & sorted” — no number is given anywhere.","u","All Photos Professionally Edited & Sorted"],
+   rawPhotos:["Raw footage and final deliverables go on the client's hard drive. Whose hard drive, and whether one is provided, is not stated.","u","Raw Footage & Final Deliverables on Client's Hard Drive"],
+   preWedding:["Priced add-on with its own crew and deliverables — ₹50,000 for a 1 day shoot on the dedicated page, but “starts from ₹10,000 (T&C Apply)” on the pricing page.","u","Pre-Wedding Photoshoot - Starts from ₹10,000 (T&C Apply) ... PRICING ₹50,000 (1 DAY SHOOT)"],
+   engagement:["","m"],
+   videography:["Yes — videographers and cinematographers listed separately","q"],
+   cinematography:["1 cinematographer at the Sangeet, 2 at the Wedding","q"],
+   traditionalVideo:["Full-length traditional wedding film, delivered in 60 days","q","Full-Length Traditional Wedding Film"],
+   highlightVideo:["Highlight film, 3–4 minutes","q","Highlight Film (3-4 Mins)"],
+   fullFilm:["Full-length traditional wedding film — 60 days","q","Full-Length Wedding Film - 60 Days"],
+   teaser:["No teaser in the package. Same-day edit on the wedding day is ₹10,000.","q","Same Day Edit on the Wedding Day - ₹10,000"],
+   reels:["One 1-minute reel for each function, delivered in 20–30 days. Extra Instagram reels & posting content ₹5,000–₹10,000.","q","Each Function Reel – 1 Min ... All Events Reels – 20 to 30 Days"],
+   sameDayEdit:["Not included. ₹10,000 on the wedding day.","q","Same Day Edit on the Wedding Day - ₹10,000"],
+   drone:["Not mentioned for the wedding package. It appears only as an additional cost on the pre-wedding shoot.","u","ADDITIONAL COST: ... Drone Shoot"],
+   liveStream:["","m"],
+   album:["Not included. Premium wedding albums start from ₹5,000 (100 photos). Magazine-size photobooks ₹25 per photo, minimum 100 photos.","q","Premium Wedding Albums - Starts from ₹5,000 (100 Photos)\nMagazine Size Photobooks - Each Photo ₹25 (Minimum 100 Photos)"],
+   albumSpec:["Album is described only by photo count (100 photos from ₹5,000). Size, binding and paper are not stated. Photobooks are magazine size.","u","Premium Wedding Albums - Starts from ₹5,000 (100 Photos)"],
+   albumPages:["","m"],
+   prints:["","m"], frames:["","m"], photoBooth:["","m"],
+   usbDrive:["Raw footage and final deliverables are put on the client's hard drive.","q","Raw Footage & Final Deliverables on Client's Hard Drive"],
+   digitalDelivery:["Google Drive link for photos, Google Drive for all final videos, plus a face-recognition gallery with 30 days of access.","q","Google Drive Link for Photos\nFace Recognition Gallery (30 Days Access)\nAll Final Videos Delivered via Google Drive"],
+   deliveryTimeline:["Quick preview photos 3 days · All photos edited & delivered 20 days · All event reels 20–30 days · Full-length wedding film 60 days · Everything complete within 90 days — the fastest photo turnaround of any quote","q","Quick Preview Photos – Within 3 Days\nAll Photos Edited & Delivered – 20 Days\nFull-Length Wedding Film – 60 Days\nAll Events Reels – 20 to 30 Days\nComplete Delivery Timeline – Within 90 Days"],
+   revisions:["","m"],
+   otherDeliverables:["Cinematic episode edits, 8–10 episodes of 15 minutes each, ₹10,000. After-wedding home shoot ₹2,000. Custom packages can be built to requirement.","q","Cinematic Episode Edits (8-10 Episode of 15 mins each) - ₹10,000\nAfter Wedding Home Shoot - ₹2,000 (T&C Apply)\nCustom packages can be created as per your requirements."],
+   exclusions:["Album, reels beyond the function reels, same-day edit, pre-wedding, episode edits and home shoot are all extra. Face-recognition gallery access lapses after 30 days.","q","Face Recognition Gallery (30 Days Access)"]
+  }
+ }],
+ addons:[
+  {n:"Instagram reels & posting content", c:"₹5,000 – ₹10,000"},
+  {n:"Extra photographer", c:"₹6,000 for 4 hours · ₹12,000 for 10 hours"},
+  {n:"Extra videographer", c:"₹12,000 for 4 hours · ₹18,000 for 10 hours"},
+  {n:"Pre-wedding photoshoot", c:"₹50,000 for a 1-day shoot — or “from ₹10,000”", note:"Two conflicting figures in the same PDF. Location, travel, food and drone extra."},
+  {n:"Cinematic episode edits", c:"₹10,000", note:"8–10 episodes of 15 mins each"},
+  {n:"Premium wedding album", c:"From ₹5,000", note:"100 photos"},
+  {n:"Magazine size photobook", c:"₹25 per photo", note:"Minimum 100 photos"},
+  {n:"After-wedding home shoot", c:"₹2,000", note:"T&C apply"},
+  {n:"Same-day edit on the wedding day", c:"₹10,000"},
+  {n:"Custom package", c:"On request"}
+ ],
+ pros:["Largest total crew of any quote — 17 crew slots across the three days","Only quote with a guest photographer and a dedicated social media content creator (on the pre-wedding)","Fastest delivery by a distance: preview in 3 days, all photos in 20 days, everything within 90","Raw footage and final files handed over on a hard drive","A reel for every function, not just a fixed count","Cheapest album entry point (from ₹5,000) and per-photo photobook pricing","Most fully specified pre-wedding package of any quote"],
+ cons:["The number of edited photos is never stated — the single biggest gap in any of the six quotes","No dates filled in: the events page still shows “(DATE / YEAR)” placeholders","Pre-wedding price appears twice at two different figures","No payment terms, no tax position, no coverage hours","No teaser or same-day edit unless you pay extra","Face-recognition gallery expires after 30 days"],
+ questions:{
+  gaps:[
+   {q:"How many edited photographs will actually be delivered?", why:"The deliverables page only says “All Photos Professionally Edited & Sorted”."},
+   {q:"Is the pre-wedding shoot ₹50,000 or does it start at ₹10,000?", why:"Both figures appear in the same PDF."},
+   {q:"Please confirm the dates: the events page has “(DATE / YEAR)” placeholders, not 26–28 Jan 2027.", why:"Dates were never filled in."},
+   {q:"How many hours of coverage per day?", why:"Only the add-on rates reference 4-hour and 10-hour blocks."},
+   {q:"Is GST charged on top of ₹2,60,000?", why:"No tax line in the quotation."},
+   {q:"What is the payment schedule and booking amount?", why:"No payment terms anywhere."},
+   {q:"Do you supply the hard drive for the raw footage, or do we?", why:"It says “Client's Hard Drive”."},
+   {q:"Is drone coverage available for the wedding days and what does it cost?", why:"Drone appears only as an extra cost on the pre-wedding page."},
+   {q:"Are travel, stay and food for the crew included on the wedding days?", why:"These are itemised only for the pre-wedding shoot."},
+   {q:"Can the face-recognition gallery be extended past 30 days?", why:"Access is stated as 30 days."},
+   {q:"How many cameras will the team bring?", why:"Not mentioned."},
+   {q:"Is there a revision round on the films?", why:"Not mentioned."}
+  ],
+  confirmed:["₹2,60,000 total price","Crew per day, itemised by role including a guest photographer","Each function gets a 1-minute reel","3–4 minute highlight film","Full-length traditional wedding film","Photos professionally edited and sorted, delivered by Google Drive","Face recognition gallery, 30 days access","Preview 3 days · photos 20 days · reels 20–30 days · film 60 days · all done in 90","Raw footage and final deliverables on a hard drive","Add-on rates for photographer, videographer, album, photobook, episode edits, home shoot and same-day edit","Pre-wedding crew and deliverables spelled out in full"]
+ }
+},
+
+/* ---------------- 5. MOMENT TREASURERS ---------------- */
+{
+ id:"mt", name:"Moment Treasurers", referral:"Parth",
+ ig:"moment_treasurers",
+ files:["Moment Treasure _ Parth Q1.pdf","Moment Treasure _ Parth Q2.pdf"],
+ blurb:"Two quotations sent. They are identical except for one extra cinematographer at the Sangeet — and ₹35,000. Use the switch to compare.",
+ packages:[
+ {
+  id:"mt-q1", label:"Quote 1 — ₹2,50,000", price:250000, taxRate:null, sourceFile:"Moment Treasure _ Parth Q1.pdf",
+  events:[
+   {key:"mandap", name:"Mandap Muhrat", date:"26th",
+    crew:[{r:"Traditional photographer",n:2,t:"p",note:"1 groom side, 1 bride side"},{r:"Traditional videographer",n:2,t:"v",note:"1 groom side, 1 bride side"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"26th - Mandap Muhrat\nGroom side: 1 traditional photographer, 1 traditional videographer\nBride side: 1 traditional photographer, 1 traditional videographer"},
+   {key:"sangeet", name:"Sangeet", date:"27th",
+    crew:[{r:"Traditional photographer",n:1,t:"p"},{r:"Traditional videographer",n:1,t:"v"},{r:"Candid photographer",n:1,t:"p"},{r:"Cinematographer",n:1,t:"v"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"27th - Sangeet\n1 traditional photographer\n1 traditional videographer\n1 candid photographers\n1 cinematographer"},
+   {key:"wedding", name:"Wedding", date:"28th",
+    crew:[{r:"Traditional photographer",n:1,t:"p"},{r:"Traditional videographer",n:1,t:"v"},{r:"Candid photographer",n:2,t:"p"},{r:"Cinematographer",n:2,t:"v"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"28th - Wedding\n1 traditional photographer\n1 traditional videographer\n2 candid photographers\n2 cinematographer"}
+  ],
+  spec:{
+   price:["₹2,50,000 — the lowest fixed package price of the six","q","Package Cost : Rs. 2,50,000"],
+   tax:["","m"],
+   totalPayable:["₹2,50,000 as quoted. If 18% GST applies it would add ₹45,000 → ₹2,95,000, but the quotation is silent on tax.","c","Package Cost : Rs. 2,50,000"],
+   payment:["","m"], travel:["","m"],
+   numEvents:["3 — Mandap Muhrat, Sangeet, Wedding","q"],
+   eventsCovered:["Mandap Muhrat 26th (groom side + bride side) · Sangeet 27th · Wedding 28th. Only the day numbers are given, no month or year.","u","26th - Mandap Muhrat"],
+   numPhotographers:["4 · 2 · 3 across the three events (7 photographer slots: 4 traditional + 3 candid)","q"],
+   numVideographers:["2 · 2 · 3 across the three events (7 slots: 4 traditional videographers + 3 cinematographers)","q"],
+   otherCrew:["","m"],
+   hours:["","m"], cameras:["","m"],
+   photography:["Yes — traditional and candid split out","q"],
+   traditionalPhoto:["2 on the Mandap day (one per side), 1 at the Sangeet, 1 at the Wedding","q"],
+   candidPhoto:["1 candid photographer at the Sangeet, 2 at the Wedding. None on the Mandap day.","q","1 candid photographers / 2 candid photographers"],
+   editedPhotos:["No number is given. All photos are colour corrected; only the main couple, family and candid pictures are “properly edited”. That is a two-tier edit, not a photo count.","u","All photos will be colour corrected.\nMain couple, family and candid pictures will be properly edited."],
+   rawPhotos:["","m"],
+   preWedding:["","m"], engagement:["","m"],
+   videography:["Yes — traditional videography and cinematography split out","q"],
+   cinematography:["1 cinematographer at the Sangeet, 2 at the Wedding","q"],
+   traditionalVideo:["Traditional film of each and every event, 1–2 hours each","q","Traditional film of each and every event of 1-2 hours will be delivered."],
+   highlightVideo:["Cinematic film of around 15–20 minutes","q","a cinematic film of around 15-20 minutes"],
+   fullFilm:["Traditional film of each event, 1–2 hours per event, plus a 15–20 min cinematic film","q"],
+   teaser:["Cinematic teaser of 1–2 minutes","q","Cinematic teaser of 1-2 mins"],
+   reels:["","m"], sameDayEdit:["","m"], drone:["","m"], liveStream:["","m"],
+   album:["","m"], albumSpec:["","m"], albumPages:["","m"],
+   prints:["","m"], frames:["","m"], photoBooth:["","m"], usbDrive:["","m"],
+   digitalDelivery:["","m"],
+   deliveryTimeline:["Photos 45–60 days · Cinematic film 30–45 days after you pick the songs · Traditional video 60–90 days","q","Photo delivery timeline - 45-60 days\nTraditional video delivery - 60-90 days\nCinematic film delivery timeline - 30-45 days after selection of songs."],
+   revisions:["","m"],
+   otherDeliverables:["Song selection for the cinematic film is the client's job; reference songs are supplied. The cinematic film clock only starts once songs are chosen.","q","Selection of songs for the cinematic film has to be done by the client. Reference songs will be given from our side."],
+   exclusions:["Nothing is listed as excluded, but nothing is listed for album, drone, reels, raw files, taxes, payment terms, travel or hours either.","u"]
+  }
+ },
+ {
+  id:"mt-q2", label:"Quote 2 — ₹2,85,000", price:285000, taxRate:null, sourceFile:"Moment Treasure _ Parth Q2.pdf",
+  events:[
+   {key:"mandap", name:"Mandap Muhrat", date:"26th",
+    crew:[{r:"Traditional photographer",n:2,t:"p",note:"1 groom side, 1 bride side"},{r:"Traditional videographer",n:2,t:"v",note:"1 groom side, 1 bride side"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"26th - Mandap Muhrat\nGroom side: 1 traditional photographer, 1 traditional videographer\nBride side: 1 traditional photographer, 1 traditional videographer"},
+   {key:"sangeet", name:"Sangeet", date:"27th",
+    crew:[{r:"Traditional photographer",n:1,t:"p"},{r:"Traditional videographer",n:1,t:"v"},{r:"Candid photographer",n:1,t:"p"},{r:"Cinematographer",n:2,t:"v",note:"the only difference from Quote 1"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"27th - Sangeet\n1 traditional photographer\n1 traditional videographer\n1 candid photographers\n2 cinematographer"},
+   {key:"wedding", name:"Wedding", date:"28th",
+    crew:[{r:"Traditional photographer",n:1,t:"p"},{r:"Traditional videographer",n:1,t:"v"},{r:"Candid photographer",n:2,t:"p"},{r:"Cinematographer",n:2,t:"v"}],
+    hours:["","m"], price:[INCL,"q"],
+    quote:"28th - Wedding\n1 traditional photographer\n1 traditional videographer\n2 candid photographers\n2 cinematographer"}
+  ],
+  spec:{
+   price:["₹2,85,000","q","Package Cost : Rs. 2,85,000"],
+   tax:["","m"],
+   totalPayable:["₹2,85,000 as quoted. If 18% GST applies it would add ₹51,300 → ₹3,36,300, but the quotation is silent on tax.","c","Package Cost : Rs. 2,85,000"],
+   payment:["","m"], travel:["","m"],
+   numEvents:["3 — Mandap Muhrat, Sangeet, Wedding","q"],
+   eventsCovered:["Mandap Muhrat 26th (groom side + bride side) · Sangeet 27th · Wedding 28th. Only day numbers given.","u"],
+   numPhotographers:["4 · 2 · 3 across the three events (7 photographer slots) — identical to Quote 1","q"],
+   numVideographers:["2 · 3 · 3 across the three events (8 slots). The extra Sangeet cinematographer is the ONLY difference from Quote 1.","q","27th - Sangeet ... 2 cinematographer"],
+   otherCrew:["","m"], hours:["","m"], cameras:["","m"],
+   photography:["Yes — traditional and candid split out","q"],
+   traditionalPhoto:["2 on the Mandap day (one per side), 1 at the Sangeet, 1 at the Wedding","q"],
+   candidPhoto:["1 candid photographer at the Sangeet, 2 at the Wedding","q"],
+   editedPhotos:["No number given. All photos colour corrected; main couple, family and candid pictures properly edited.","u","All photos will be colour corrected."],
+   rawPhotos:["","m"], preWedding:["","m"], engagement:["","m"],
+   videography:["Yes","q"],
+   cinematography:["2 cinematographers at the Sangeet, 2 at the Wedding","q"],
+   traditionalVideo:["Traditional film of each and every event, 1–2 hours each","q"],
+   highlightVideo:["Cinematic film of around 15–20 minutes","q"],
+   fullFilm:["Traditional film of each event (1–2 hrs) plus a 15–20 min cinematic film","q"],
+   teaser:["Cinematic teaser of 1–2 minutes","q"],
+   reels:["","m"], sameDayEdit:["","m"], drone:["","m"], liveStream:["","m"],
+   album:["","m"], albumSpec:["","m"], albumPages:["","m"],
+   prints:["","m"], frames:["","m"], photoBooth:["","m"], usbDrive:["","m"],
+   digitalDelivery:["","m"],
+   deliveryTimeline:["Photos 45–60 days · Cinematic film 30–45 days after song selection · Traditional video 60–90 days","q"],
+   revisions:["","m"],
+   otherDeliverables:["Client selects the songs for the cinematic film; reference songs supplied.","q"],
+   exclusions:["Nothing listed as excluded — but album, drone, reels, raw files, taxes, payment terms, travel and hours are all absent too.","u"]
+  }
+ }],
+ addons:[],
+ pros:["Lowest fixed package price of the six (Quote 1, ₹2,50,000)","Two photographers and two videographers on the Mandap day — one per side, matched only by Emotions & Camera","Traditional film of every event at 1–2 hours each, included in the base price","Clear traditional / candid / cinematographer split","Fastest cinematic film turnaround: 30–45 days after song selection"],
+ cons:["No edited photo count — and the wording implies only selected pictures get a full edit","Silent on almost everything else: no album, drone, reels, raw files, hours, taxes, payment terms or travel","No add-on price list at all, so there is nothing to negotiate from","Slowest photo delivery of the six (45–60 days)","Cinematic film timeline depends on you choosing songs"],
+ questions:{
+  gaps:[
+   {q:"How many edited photographs do we get, and what does “properly edited” cover versus just colour corrected?", why:"A two-tier edit is described with no numbers."},
+   {q:"What is the difference between Quote 1 and Quote 2 beyond the one extra Sangeet cinematographer — is ₹35,000 only for that?", why:"The two PDFs are otherwise word-for-word identical."},
+   {q:"Are RAW photographs included?", why:"Not mentioned."},
+   {q:"Is GST charged on top?", why:"No tax line."},
+   {q:"What is the payment schedule and booking amount?", why:"Not mentioned."},
+   {q:"How many hours of coverage per event?", why:"Not mentioned."},
+   {q:"Is an album included, and what would one cost?", why:"Albums are not mentioned at all."},
+   {q:"Are Instagram reels included or available?", why:"Not mentioned."},
+   {q:"Is drone coverage available and at what price?", why:"Not mentioned."},
+   {q:"How are the photos and films delivered — link, drive, hard disk?", why:"No delivery method is stated."},
+   {q:"Are travel, stay and food for the crew included?", why:"Not mentioned."},
+   {q:"Can we get a written add-on price list?", why:"There is no add-on section in either quote."},
+   {q:"How many cameras will the team bring?", why:"Not mentioned."}
+  ],
+  confirmed:["Package cost ₹2,50,000 (Q1) or ₹2,85,000 (Q2)","Crew per event, split by traditional / candid / cinematographer","Both sides covered on the Mandap day","All photos colour corrected; couple, family and candid pictures properly edited","1–2 min cinematic teaser","15–20 min cinematic film","Traditional film of every event, 1–2 hours each","Photos 45–60 days, traditional video 60–90 days, cinematic film 30–45 days after song selection","Reference songs supplied for your selection"]
+ }
+},
+
+/* ---------------- 6. THE MEMORY MAKERS ---------------- */
+{
+ id:"mm", name:"The Memory Makers", referral:"Yashvi",
+ ig:"thememorymakers._",
+ files:["The memory Makers_Yashvi.txt"],
+ blurb:"The only quote priced per event, per crew member. It is a plain text message, not a designed proposal — so almost every deliverable is unstated.",
+ alacarte:true,
+ packages:[{
+  id:"mm-main", label:"Per-event pricing", price:null, taxRate:null,
+  events:[
+   {key:"mandap", name:"Mandap", date:"Not stated", dateStatus:"m",
+    crew:[{r:"Photographer",n:1,t:"p"},{r:"Videographer",n:1,t:"v"}],
+    hours:["","m"],
+    price:["₹18,000 — the figure sits on the video line and appears to cover the photo + video pair, but it is not spelled out","u"],
+    lines:[{id:"mandap-pv", label:"1 photo + 1 video", price:18000, note:"quoted as one 18k line"}],
+    quote:"Mandap\n1 photo \n1 video 18k"},
+   {key:"sangeet", name:"Sangeet", date:"Not stated", dateStatus:"m",
+    crew:[{r:"Photographer",n:1,t:"p"},{r:"Videographer",n:1,t:"v"},{r:"Candid photographer",n:1,t:"p"},{r:"Cinematographer",n:1,t:"v"}],
+    hours:["","m"],
+    price:["₹18,000 photo + video · ₹22,000 candid · ₹35,000 cinematic — pick what you want","q"],
+    lines:[{id:"sangeet-pv", label:"1 photo + 1 video", price:18000},{id:"sangeet-cd", label:"1 candid", price:22000},{id:"sangeet-cn", label:"1 cinematic", price:35000}],
+    quote:"Sangeet\n1 photo\n1 video 18k\n1 candid 22k\n1 cinematic 35k"},
+   {key:"wedding", name:"Wedding", date:"Not stated", dateStatus:"m",
+    crew:[{r:"Photographer",n:1,t:"p"},{r:"Videographer",n:1,t:"v"},{r:"Candid photographer",n:1,t:"p"},{r:"Cinematographer",n:1,t:"v"}],
+    hours:["","m"],
+    price:["₹30,000 photo + video · ₹30,000 candid · ₹40,000 cinematic — pick what you want","q"],
+    lines:[{id:"wedding-pv", label:"1 photo + 1 video", price:30000},{id:"wedding-cd", label:"1 candid", price:30000},{id:"wedding-cn", label:"1 cinematic", price:40000}],
+    quote:"Wedding\n1 photo. \n1 video.  30k\n1 candid. 30k\n1 cinematic 40k"}
+  ],
+  spec:{
+   price:["No total is quoted. Pricing is per crew member per event: Mandap ₹18,000 · Sangeet ₹18,000 / ₹22,000 / ₹35,000 · Wedding ₹30,000 / ₹30,000 / ₹40,000","q"],
+   tax:["","m"],
+   totalPayable:["Depends entirely on what you select — use the builder on the Pricing tab. Taking every line comes to ₹1,93,000, which would be the cheapest of all six, but that figure is added up by this dashboard, not quoted by the photographer.","c"],
+   payment:["","m"], travel:["","m"],
+   numEvents:["3 priced — Mandap, Sangeet, Wedding","q"],
+   eventsCovered:["Mandap · Sangeet · Wedding. No dates are given anywhere in the message.","u"],
+   numPhotographers:["Up to 1 · 2 · 2 depending on what you buy (1 photo + 1 candid at the Sangeet and the Wedding)","q"],
+   numVideographers:["Up to 1 · 2 · 2 depending on what you buy (1 video + 1 cinematic at the Sangeet and the Wedding)","q"],
+   otherCrew:["","m"], hours:["","m"], cameras:["","m"],
+   photography:["Yes — a photo and a candid line are priced separately","q"],
+   traditionalPhoto:["The “1 photo” line, priced with the video: ₹18,000 at the Mandap and Sangeet, ₹30,000 at the Wedding","u","1 photo \n1 video 18k"],
+   candidPhoto:["Priced separately: ₹22,000 at the Sangeet, ₹30,000 at the Wedding. Not offered for the Mandap.","q","1 candid 22k / 1 candid. 30k"],
+   editedPhotos:["","m"], rawPhotos:["","m"], preWedding:["","m"], engagement:["","m"],
+   videography:["Yes — a video line and a separate cinematic line","q"],
+   cinematography:["Priced separately: ₹35,000 at the Sangeet, ₹40,000 at the Wedding. Not offered for the Mandap.","q","1 cinematic 35k / 1 cinematic 40k"],
+   traditionalVideo:["The “1 video” line exists but nothing is said about what it produces.","u"],
+   highlightVideo:["","m"], fullFilm:["","m"], teaser:["","m"], reels:["","m"],
+   sameDayEdit:["","m"], drone:["","m"], liveStream:["","m"],
+   album:["","m"], albumSpec:["","m"], albumPages:["","m"],
+   prints:["","m"], frames:["","m"], photoBooth:["","m"], usbDrive:["","m"], digitalDelivery:["","m"],
+   deliveryTimeline:["","m"], revisions:["","m"],
+   otherDeliverables:["","m"],
+   exclusions:["Nothing is stated about what is or is not included. The quote is a crew rate card only.","u"]
+  }
+ }],
+ addons:[],
+ pros:["The only quotation that prices each event separately — you can buy exactly the coverage you want","Cheapest way to cover a single event (₹18,000 for the Mandap)","Adding every line still comes out below every other quote (calculated, not quoted)","Easy to negotiate line by line"],
+ cons:["No deliverables whatsoever: no photo count, no film, no teaser, no reels, no album, no timelines","Not a formal quotation — a text message with no terms, no tax, no payment schedule","No dates confirmed","Whether ₹18,000 covers both the photo and the video crew is not spelled out","Nothing to hold them to if delivery goes wrong"],
+ questions:{
+  gaps:[
+   {q:"Does the ₹18,000 line cover both the photographer and the videographer, or is it per person?", why:"The price sits on the video line under both."},
+   {q:"What do we actually receive — how many edited photographs, and in what form?", why:"No deliverables are listed at all."},
+   {q:"What films come out of the cinematic line — teaser, highlight, full film, and how long?", why:"Only a crew rate is given."},
+   {q:"What does the “video” line produce as against the “cinematic” line?", why:"Both are priced but neither is described."},
+   {q:"What is the delivery timeline for photos and for films?", why:"Not mentioned."},
+   {q:"Are RAW files included?", why:"Not mentioned."},
+   {q:"How many hours of coverage does each line buy?", why:"Not mentioned."},
+   {q:"Is GST charged on top?", why:"Not mentioned."},
+   {q:"What is the payment schedule?", why:"Not mentioned."},
+   {q:"Is an album available and at what price?", why:"Not mentioned."},
+   {q:"Are Instagram reels available?", why:"Not mentioned."},
+   {q:"Is drone coverage available?", why:"Not mentioned."},
+   {q:"Are travel, stay and food extra?", why:"Not mentioned."},
+   {q:"Can you confirm the dates 26, 27 and 28 January 2027?", why:"No dates in the message."},
+   {q:"Can we get all of this in a written, dated quotation?", why:"The quote is an informal message with no terms."}
+  ],
+  confirmed:["Mandap: 1 photo + 1 video — ₹18,000","Sangeet: 1 photo + 1 video ₹18,000 · 1 candid ₹22,000 · 1 cinematic ₹35,000","Wedding: 1 photo + 1 video ₹30,000 · 1 candid ₹30,000 · 1 cinematic ₹40,000","Candid and cinematic are optional extras you can add per event"]
+ }
+}
+];
+
+/* ============================================================
+   SPEC ROWS — the master comparison categories
+   ============================================================ */
+var SPEC_GROUPS=[
+ {g:"Price & terms", rows:[["price","Total quotation price"],["tax","Taxes"],["totalPayable","Total payable"],["payment","Payment terms"],["travel","Travel / accommodation"]]},
+ {g:"Coverage", rows:[["numEvents","Number of events"],["eventsCovered","Events covered"],["numPhotographers","Number of photographers"],["numVideographers","Number of videographers"],["otherCrew","Other crew"],["hours","Hours of coverage"],["cameras","Number of cameras"]]},
+ {g:"Photography", rows:[["photography","Photography"],["traditionalPhoto","Traditional photography"],["candidPhoto","Candid photography"],["editedPhotos","Edited photographs"],["rawPhotos","Raw / unedited photos"],["preWedding","Pre-wedding shoot"],["engagement","Engagement shoot"]]},
+ {g:"Videography", rows:[["videography","Videography"],["cinematography","Cinematography"],["traditionalVideo","Traditional / full-ceremony video"],["highlightVideo","Highlight video"],["fullFilm","Full-length film"],["teaser","Trailer / teaser"],["reels","Reels / Instagram videos"],["sameDayEdit","Same-day edit"],["drone","Drone coverage"],["liveStream","Live streaming"]]},
+ {g:"Albums, prints & handover", rows:[["album","Album"],["albumSpec","Album specification"],["albumPages","Album pages / sheets"],["prints","Prints"],["frames","Frames"],["photoBooth","Photo booth"],["usbDrive","USB / hard drive"],["digitalDelivery","Digital delivery"]]},
+ {g:"Delivery & conditions", rows:[["deliveryTimeline","Delivery timeline"],["revisions","Revisions"],["otherDeliverables","Other deliverables"],["exclusions","Exclusions & conditions"]]}
+];
+var EVENT_ORDER=[
+ {key:"mandap", name:"Mandap Muhurat", sub:"26 Jan 2027 — both sides"},
+ {key:"sangeet", name:"Sangeet", sub:"27 Jan 2027 — called “Sagan” by Emotions & Camera"},
+ {key:"wedding", name:"Wedding", sub:"28 Jan 2027"},
+ {key:"prewedding", name:"Pre-wedding", sub:"Optional add-on — only Match in Heaven quoted a full package"}
+];
+var NOTE_FIELDS=[
+ ["notes","My notes"],["likes","Things I like"],["dislikes","Things I dislike"],
+ ["pros","My pros"],["cons","My cons"],["ask","Questions to ask them"],["negotiate","Negotiation points"]
+];
+var FOLLOWUP=["Not contacted","Waiting on their reply","Questions sent","Call booked","Met them","Negotiating","Decided"];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+var LSKEY="photographerCompare.v1";
+var state={tier:{}, status:{}, rating:{}, notes:{}, evnotes:{}, asked:{}, follow:{}, mm:{}, theme:null, selected:null, filter:"all"};
+function loadState(){
+  try{ var raw=localStorage.getItem(LSKEY); if(raw){ var p=JSON.parse(raw); for(var k in p){ if(p.hasOwnProperty(k)) state[k]=p[k]; } } }catch(e){}
+  PHOTOGRAPHERS.forEach(function(p){ if(state.tier[p.id]===undefined) state.tier[p.id]=0; });
+  if(!state.mm||!Object.keys(state.mm).length){
+    state.mm={"mandap-pv":true,"sangeet-pv":true,"sangeet-cd":true,"sangeet-cn":true,"wedding-pv":true,"wedding-cd":true,"wedding-cn":true};
+  }
+  if(!state.selected) state.selected=PHOTOGRAPHERS.map(function(p){return p.id;});
+}
+var saveTimer=null;
+function saveState(){
+  clearTimeout(saveTimer);
+  saveTimer=setTimeout(function(){ try{ localStorage.setItem(LSKEY,JSON.stringify(state)); }catch(e){} },180);
+}
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+function esc(s){ return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;"); }
+function rup(n){ // Indian numbering, e.g. 340000 -> 3,40,000
+  var s=String(Math.round(n)); var last3=s.slice(-3); var rest=s.slice(0,-3);
+  if(rest) last3=","+last3;
+  return "₹"+rest.replace(/\B(?=(\d{2})+(?!\d))/g,",")+last3;
+}
+function fld(a){ if(!a) return {v:"",s:"m",q:""}; return {v:a[0]||"",s:(a[1]||"q"),q:a[2]||""}; }
+var CHIP={c:["c-c","calculated"],u:["c-u","verify"],m:["c-m","not mentioned"],q:null};
+var srcSeq=0;
+function renderField(a){
+  var f=fld(a); var v=f.v, s=f.s;
+  if(!v){ s="m"; v="Not mentioned"; }
+  var out="";
+  var c=CHIP[s];
+  if(c) out+='<span class="chip '+c[0]+'">'+c[1]+'</span> ';
+  out+='<span class="val s-'+s+'">'+esc(v)+'</span>';
+  if(f.q){
+    var id="src"+(++srcSeq);
+    out+='<button class="srcbtn" data-src="'+id+'" title="Show the original wording from the PDF">[source]</button>';
+    out+='<div class="src" id="'+id+'">'+esc(f.q)+'</div>';
+  }
+  return out;
+}
+function pkgOf(p){ return p.packages[Math.min(state.tier[p.id]||0, p.packages.length-1)]; }
+function crewCount(pkg,type){
+  var n=0;
+  pkg.events.forEach(function(e){ if(e.addon) return; e.crew.forEach(function(c){ if(!type||c.t===type) n+=c.n; }); });
+  return n;
+}
+function crewLine(e){
+  return e.crew.map(function(c){ return c.n+" "+c.r.toLowerCase()+(c.n>1?"s":"")+(c.note?" ("+c.note+")":""); }).join(" · ");
+}
+function mmTotal(){
+  var t=0; var mm=byId("mm"); if(!mm) return 0;
+  mm.packages[0].events.forEach(function(e){
+    (e.lines||[]).forEach(function(l){ if(state.mm[l.id]) t+=l.price; });
+  });
+  return t;
+}
+function byId(id){ for(var i=0;i<PHOTOGRAPHERS.length;i++) if(PHOTOGRAPHERS[i].id===id) return PHOTOGRAPHERS[i]; return null; }
+function priceInfo(p){
+  var pkg=pkgOf(p);
+  if(p.alacarte){
+    var t=mmTotal();
+    return {base:t, tax:0, total:t, calc:true,
+      label:t?rup(t):"—", sub:"calculated from your selection", taxNote:"no tax stated"};
+  }
+  var base=pkg.price||0;
+  var tax=pkg.taxRate?Math.round(base*pkg.taxRate):0;
+  return {base:base, tax:tax, total:base+tax, calc:!!tax,
+    label:rup(base), sub:pkg.taxRate?("+ "+rup(tax)+" GST = "+rup(base+tax)):"no tax stated in the quote",
+    taxNote:pkg.taxRate?"18% GST excluded":"no tax stated"};
+}
+function deliverableCount(pkg){
+  var n=0; for(var k in pkg.spec){ if(!pkg.spec.hasOwnProperty(k)) continue;
+    var f=fld(pkg.spec[k]); if(f.v && f.s!=="m") n++; }
+  return n;
+}
+function visiblePhotographers(){
+  return PHOTOGRAPHERS.filter(function(p){
+    if(state.filter==="all") return true;
+    if(state.filter==="notrejected") return state.status[p.id]!=="rejected";
+    return state.status[p.id]===state.filter;
+  });
+}
+function statusOf(p){ return state.status[p.id]||""; }
+
+/* ============================================================
+   VIEWS
+   ============================================================ */
+var TABS=[
+ ["dash","Dashboard"],["compare","Side by side"],["events","By event"],
+ ["deliv","Every deliverable"],["price","Pricing"],["quest","Questions to ask"],
+ ["best","Best for"],["decide","My decision"]
+];
+var current="dash";
+
+function filterBar(){
+  var opts=[["all","All six"],["shortlisted","★ Shortlisted"],["maybe","Maybe"],["rejected","Rejected"],["notrejected","Everything but rejected"]];
+  return '<div class="selbar"><span class="eyebrow">Show</span>'+opts.map(function(o){
+    return '<button class="pill" data-filter="'+o[0]+'" aria-pressed="'+(state.filter===o[0])+'">'+esc(o[1])+'</button>';
+  }).join("")+'</div>';
+}
+function legendBar(){
+  return '<div class="legend"><b style="color:var(--ink)">How to read every value:</b>'+
+   '<span><b style="color:var(--ok)">no tag</b> = quoted straight from the PDF</span>'+
+   '<span><span class="chip c-c">calculated</span> worked out here, not by the photographer</span>'+
+   '<span><span class="chip c-u">verify</span> ambiguous or contradictory</span>'+
+   '<span><span class="chip c-m">not mentioned</span> absent from the quotation</span></div>';
+}
+function statusButtons(p){
+  var s=statusOf(p);
+  return ["shortlisted","maybe","rejected"].map(function(k){
+    var lbl=k==="shortlisted"?"★ Shortlist":(k==="maybe"?"Maybe":"Reject");
+    return '<button class="sbtn '+(s===k?"on-"+k:"")+'" data-status="'+k+'" data-p="'+p.id+'">'+lbl+'</button>';
+  }).join("");
+}
+function starRow(p){
+  var r=state.rating[p.id]||0; var out='<span class="stars" title="My overall rating out of 5">';
+  for(var i=1;i<=5;i++) out+='<button data-star="'+i+'" data-p="'+p.id+'" class="'+(i<=r?"lit":"")+'" aria-label="Rate '+i+' of 5">'+(i<=r?"★":"☆")+'</button>';
+  return out+'</span>';
+}
+function tierSwitch(p){
+  if(p.packages.length<2) return "";
+  return '<div class="tiersel">'+p.packages.map(function(pk,i){
+    return '<button data-tier="'+i+'" data-p="'+p.id+'" aria-pressed="'+((state.tier[p.id]||0)===i)+'">'+esc(pk.label)+'</button>';
+  }).join("")+'</div>';
+}
+
+/* ---------- DASHBOARD ---------- */
+function viewDash(){
+  var list=visiblePhotographers();
+  var h='<div class="sechead"><h2>Six quotations, one screen</h2><p>Every figure below is lifted from the PDF or text file named on each card. Nothing here is inferred: where a quotation is silent, it says so. Shortlist, rate and take notes as you go — everything you type is saved in this browser.</p></div>';
+  h+=legendBar()+filterBar();
+  if(!list.length) return h+'<div class="empty">Nothing matches that filter.</div>';
+  h+='<div class="dashgrid">';
+  list.forEach(function(p){
+    var pkg=pkgOf(p), pi=priceInfo(p), st=statusOf(p);
+    h+='<article class="pcard '+(st?"st-"+st:"")+'">';
+    h+='<div class="rebate"><span>'+esc(p.referral?"via "+p.referral:"")+'</span><span>'+esc(pkg.label)+'</span></div>';
+    h+='<div class="body">';
+    h+='<div class="headrow"><div><h3>'+esc(p.name)+'</h3><div class="refline">Referred by <b>'+esc(p.referral)+'</b>'+(p.contactName?' · '+esc(p.contactName):'')+'</div></div>';
+    h+='<div class="priceblk">'+(pi.calc&&p.alacarte?'<span class="chip c-c">calculated</span><br>':'')+'<div class="p">'+esc(pi.label)+'</div><div class="ps">'+esc(pi.sub)+'</div></div></div>';
+    h+='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">';
+    h+='<a class="iglink" href="https://www.instagram.com/'+esc(p.ig)+'" target="_blank" rel="noopener">◎ @'+esc(p.ig)+'</a>';
+    h+=tierSwitch(p)+'</div>';
+    h+='<p class="small muted" style="margin:0">'+esc(p.blurb)+'</p>';
+    h+='<dl class="speclist">';
+    h+='<dt>Events</dt><dd>'+pkg.events.filter(function(e){return !e.addon;}).length+' — '+esc(pkg.events.filter(function(e){return !e.addon;}).map(function(e){return e.name.replace(/ \(.*/,"");}).join(", "))+'</dd>';
+    h+='<dt>Photo crew</dt><dd>'+crewCount(pkg,"p")+' slots across the events</dd>';
+    h+='<dt>Video crew</dt><dd>'+crewCount(pkg,"v")+' slots across the events</dd>';
+    var ep=fld(pkg.spec.editedPhotos);
+    h+='<dt>Edited photos</dt><dd>'+(ep.v?esc(ep.v.length>46?ep.v.slice(0,46)+"…":ep.v):'<span class="s-m" style="font-style:italic">not stated</span>')+'</dd>';
+    var hrs=fld(pkg.spec.hours);
+    h+='<dt>Hours</dt><dd>'+(hrs.v?esc(hrs.v.length>46?hrs.v.slice(0,46)+"…":hrs.v):'<span class="s-m" style="font-style:italic">not stated</span>')+'</dd>';
+    h+='</dl>';
+    h+='<div class="taglist">'+p.pros.slice(0,2).map(function(x){return '<span class="tag pos">+ '+esc(x.length>60?x.slice(0,60)+"…":x)+'</span>';}).join("")+
+       p.cons.slice(0,2).map(function(x){return '<span class="tag warn">− '+esc(x.length>60?x.slice(0,60)+"…":x)+'</span>';}).join("")+'</div>';
+    h+='<div class="taglist">'+p.files.map(function(f){return '<span class="filebadge">'+esc(f)+'</span>';}).join("")+'</div>';
+    h+='</div>';
+    h+='<div class="cardfoot">'+statusButtons(p)+starRow(p)+'</div>';
+    h+='</article>';
+  });
+  return h+'</div>';
+}
+
+/* ---------- SIDE BY SIDE ---------- */
+function viewCompare(){
+  var h='<div class="sechead"><h2>Side by side</h2><p>Turn photographers on and off to compare any two, three or all six. The row labels stay put as you scroll sideways; search narrows to the categories you care about.</p></div>';
+  h+=legendBar();
+  h+='<div class="selbar"><span class="eyebrow">Compare</span>'+PHOTOGRAPHERS.map(function(p){
+    var on=state.selected.indexOf(p.id)>-1;
+    return '<button class="pill" data-sel="'+p.id+'" aria-pressed="'+on+'"><span class="sw"></span>'+esc(p.name)+'</button>';
+  }).join("")+'<button class="btn" data-selall="1">All</button><button class="btn" data-selnone="1">None</button>'+
+  '<input type="search" class="searchbox" id="rowSearch" placeholder="Filter rows — e.g. drone, album, GST" value="'+esc(window.__rowq||"")+'"></div>';
+
+  var cols=PHOTOGRAPHERS.filter(function(p){ return state.selected.indexOf(p.id)>-1; });
+  if(!cols.length) return h+'<div class="empty">Select at least one photographer above.</div>';
+  var q=(window.__rowq||"").toLowerCase();
+
+  h+='<div class="tablewrap"><table><thead><tr><th class="rowlab">Category</th>';
+  cols.forEach(function(p){
+    var pi=priceInfo(p), pkg=pkgOf(p);
+    h+='<th class="cell colhead"><div class="n">'+esc(p.name)+'</div><div class="r">via '+esc(p.referral)+' · '+esc(pkg.label)+'</div><div class="pr">'+esc(pi.label)+(p.alacarte?' <span class="chip c-c">calculated</span>':'')+'</div></th>';
+  });
+  h+='</tr></thead><tbody>';
+  h+='<tr class="grouprow"><td class="rowlab">Identity</td>'+cols.map(function(){return '<td></td>';}).join("")+'</tr>';
+  h+='<tr><td class="rowlab">Instagram</td>'+cols.map(function(p){
+    return '<td class="cell"><a href="https://www.instagram.com/'+esc(p.ig)+'" target="_blank" rel="noopener">@'+esc(p.ig)+'</a></td>';}).join("")+'</tr>';
+  h+='<tr><td class="rowlab">Source file</td>'+cols.map(function(p){
+    return '<td class="cell">'+p.files.map(function(f){return '<span class="filebadge">'+esc(f)+'</span>';}).join(" ")+'</td>';}).join("")+'</tr>';
+  h+='<tr><td class="rowlab">My status</td>'+cols.map(function(p){
+    var s=statusOf(p)||"undecided"; var r=state.rating[p.id]||0;
+    return '<td class="cell"><b>'+esc(s.charAt(0).toUpperCase()+s.slice(1))+'</b>'+(r?' · '+r+'/5':'')+'</td>';}).join("")+'</tr>';
+
+  SPEC_GROUPS.forEach(function(g){
+    var rows=g.rows.filter(function(r){
+      if(!q) return true;
+      if(r[1].toLowerCase().indexOf(q)>-1) return true;
+      return cols.some(function(p){ var f=fld(pkgOf(p).spec[r[0]]); return (f.v+" "+f.q).toLowerCase().indexOf(q)>-1; });
+    });
+    if(!rows.length) return;
+    h+='<tr class="grouprow"><td class="rowlab">'+esc(g.g)+'</td>'+cols.map(function(){return '<td></td>';}).join("")+'</tr>';
+    rows.forEach(function(r){
+      h+='<tr><td class="rowlab">'+esc(r[1])+'</td>';
+      cols.forEach(function(p){ h+='<td class="cell">'+renderField(pkgOf(p).spec[r[0]])+'</td>'; });
+      h+='</tr>';
+    });
+  });
+  if(!q || "add-ons".indexOf(q)>-1 || "addons".indexOf(q)>-1){
+    h+='<tr class="grouprow"><td class="rowlab">Optional add-ons</td>'+cols.map(function(){return '<td></td>';}).join("")+'</tr>';
+    h+='<tr><td class="rowlab">Priced add-ons</td>'+cols.map(function(p){
+      if(!p.addons.length) return '<td class="cell"><span class="chip c-m">not mentioned</span> <span class="val s-m">No add-on list in this quotation</span></td>';
+      return '<td class="cell">'+p.addons.map(function(a){return '<div style="margin-bottom:4px"><b>'+esc(a.n)+'</b> — '+esc(a.c)+(a.note?'<br><span class="tiny muted">'+esc(a.note)+'</span>':'')+'</div>';}).join("")+'</td>';
+    }).join("")+'</tr>';
+  }
+  return h+'</tbody></table></div>';
+}
+
+/* ---------- BY EVENT ---------- */
+var currentEvent="wedding";
+function viewEvents(){
+  var h='<div class="sechead"><h2>Event by event</h2><p>What each photographer puts on the ground for a single event, and what they charge for it. Only The Memory Makers priced their events individually — for everyone else the price line says so plainly rather than guessing a split.</p></div>';
+  h+=filterBar();
+  h+='<div class="selbar"><span class="eyebrow">Event</span>'+EVENT_ORDER.map(function(e){
+    return '<button class="pill" data-ev="'+e.key+'" aria-pressed="'+(currentEvent===e.key)+'">'+esc(e.name)+'</button>';
+  }).join("")+'</div>';
+  var ev=EVENT_ORDER.filter(function(e){return e.key===currentEvent;})[0];
+  h+='<div class="note-b"><b>'+esc(ev.name)+'</b> — '+esc(ev.sub)+'</div>';
+  var rows=[];
+  visiblePhotographers().forEach(function(p){
+    var pkg=pkgOf(p);
+    var e=pkg.events.filter(function(x){return x.key===currentEvent;})[0];
+    if(e) rows.push({p:p,pkg:pkg,e:e});
+  });
+  if(!rows.length) return h+'<div class="empty">None of the photographers currently shown quoted for this event.</div>';
+  h+='<div class="tablewrap"><table><thead><tr><th class="rowlab">Photographer</th><th style="min-width:230px">Coverage on the day</th><th style="min-width:110px">Photo / video</th><th style="min-width:110px">Hours</th><th style="min-width:250px">Price for this event</th></tr></thead><tbody>';
+  rows.forEach(function(r){
+    var np=0,nv=0; r.e.crew.forEach(function(c){ if(c.t==="p") np+=c.n; if(c.t==="v") nv+=c.n; });
+    h+='<tr><td class="rowlab"><div style="font-family:var(--serif);font-size:15px">'+esc(r.p.name)+'</div><div class="tiny muted">via '+esc(r.p.referral)+'</div><div class="tiny muted">'+esc(r.pkg.label)+'</div></td>';
+    h+='<td>'+esc(crewLine(r.e))+
+      (r.e.scope?'<div class="tiny '+(r.e.scopeStatus==="u"?"":"muted")+'" style="margin-top:5px">'+(r.e.scopeStatus==="u"?'<span class="chip c-u">verify</span> ':'')+esc(r.e.scope)+'</div>':'')+
+      (r.e.deliverables?'<div class="tiny muted" style="margin-top:6px"><b>Deliverables:</b> '+esc(r.e.deliverables.join(" · "))+'</div>':'')+
+      (r.e.quote?'<button class="srcbtn" data-src="ev'+(++srcSeq)+'">[source]</button><div class="src" id="ev'+srcSeq+'">'+esc(r.e.quote)+'</div>':'')+'</td>';
+    h+='<td class="mono">'+np+' / '+nv+'</td>';
+    h+='<td>'+renderField(r.e.hours)+'</td>';
+    h+='<td>'+renderField(r.e.price)+'</td></tr>';
+  });
+  h+='</tbody></table></div>';
+  h+='<h3 style="font-family:var(--serif);font-size:19px;margin:26px 0 12px">My notes on the '+esc(ev.name)+'</h3>';
+  h+='<div class="notesgrid">'+rows.map(function(r){
+    var key=r.p.id+"|"+currentEvent;
+    return '<div class="card pad field"><label>'+esc(r.p.name)+'</label>'+
+      '<textarea data-evnote="'+esc(key)+'" placeholder="What matters to you about this photographer for the '+esc(ev.name)+'…">'+esc(state.evnotes[key]||"")+'</textarea></div>';
+  }).join("")+'</div>';
+  return h;
+}
+
+/* ---------- EVERY DELIVERABLE ---------- */
+function viewDeliv(){
+  var h='<div class="sechead"><h2>Every deliverable, nothing condensed</h2><p>The full extraction for each photographer, category by category, with the original wording one click away. Your own notes for each one sit at the bottom of their panel.</p></div>';
+  h+=legendBar()+filterBar();
+  h+='<div class="selbar"><button class="btn" data-openall="1">Expand all</button><button class="btn" data-closeall="1">Collapse all</button></div>';
+  visiblePhotographers().forEach(function(p){
+    var pkg=pkgOf(p), pi=priceInfo(p);
+    h+='<details class="acc" data-acc="'+p.id+'"><summary><span class="nm">'+esc(p.name)+'</span>'+
+      '<span class="tiny muted">via '+esc(p.referral)+'</span>'+
+      '<span class="mono small">'+esc(pi.label)+'</span>'+
+      (statusOf(p)?'<span class="chip '+(statusOf(p)==="shortlisted"?"c-c":"c-m")+'">'+esc(statusOf(p))+'</span>':'')+
+      '<span class="caret">▸</span></summary><div class="accbody">';
+    h+='<div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:16px">'+tierSwitch(p)+
+       '<a class="iglink" href="https://www.instagram.com/'+esc(p.ig)+'" target="_blank" rel="noopener">◎ @'+esc(p.ig)+'</a>'+
+       p.files.map(function(f){return '<span class="filebadge">'+esc(f)+'</span>';}).join("")+'</div>';
+
+    h+='<div class="dl-sec"><h4>Coverage on the ground</h4><div class="dl-list">';
+    pkg.events.forEach(function(e){
+      h+='<div class="dl-item"><div class="k">'+esc(e.name)+(e.addon?' <span class="chip c-u">add-on</span>':'')+'<div class="tiny muted">'+esc(e.date)+'</div></div><div>'+
+        esc(crewLine(e))+
+        (e.scope?'<div class="tiny" style="margin-top:5px;color:var(--'+(e.scopeStatus==="u"?"warn":"muted")+')">'+esc(e.scope)+'</div>':'')+
+        (e.deliverables?'<div class="small" style="margin-top:6px"><b>Deliverables:</b> '+esc(e.deliverables.join(" · "))+'</div>':'')+
+        '<div class="small" style="margin-top:5px"><b>Hours:</b> '+renderField(e.hours)+'</div>'+
+        '<div class="small" style="margin-top:5px"><b>Price:</b> '+renderField(e.price)+'</div>'+
+        (e.quote?'<button class="srcbtn" data-src="dv'+(++srcSeq)+'">[source]</button><div class="src" id="dv'+srcSeq+'">'+esc(e.quote)+'</div>':'')+
+        '</div></div>';
+    });
+    h+='</div></div>';
+
+    SPEC_GROUPS.forEach(function(g){
+      h+='<div class="dl-sec"><h4>'+esc(g.g)+'</h4><div class="dl-list">';
+      g.rows.forEach(function(r){
+        h+='<div class="dl-item"><div class="k">'+esc(r[1])+'</div><div>'+renderField(pkg.spec[r[0]])+'</div></div>';
+      });
+      h+='</div></div>';
+    });
+
+    h+='<div class="dl-sec"><h4>Optional add-ons</h4><div class="dl-list">';
+    if(!p.addons.length){
+      h+='<div class="dl-item"><div class="k">Add-on list</div><div><span class="chip c-m">not mentioned</span> <span class="val s-m">This quotation contains no add-on pricing at all.</span></div></div>';
+    } else {
+      p.addons.forEach(function(a){
+        h+='<div class="dl-item"><div class="k">'+esc(a.n)+'</div><div><b>'+esc(a.c)+'</b>'+(a.note?'<div class="tiny muted">'+esc(a.note)+'</div>':'')+'</div></div>';
+      });
+    }
+    h+='</div></div>';
+
+    h+='<div class="dl-sec"><h4>What stands out — read from the quotation</h4><div class="dl-list">';
+    h+='<div class="dl-item"><div class="k">In their favour</div><div><ul style="margin:0;padding-left:17px">'+p.pros.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div></div>';
+    h+='<div class="dl-item"><div class="k">Against them</div><div><ul style="margin:0;padding-left:17px">'+p.cons.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div></div>';
+    h+='</div></div>';
+
+    h+='<div class="dl-sec"><h4>My notes</h4>';
+    h+='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px">'+statusButtons(p)+starRow(p)+'</div>';
+    h+='<div class="notesgrid">';
+    h+='<div class="field"><label>Follow-up status</label><select data-follow="'+p.id+'">'+FOLLOWUP.map(function(f){
+      return '<option'+((state.follow[p.id]||FOLLOWUP[0])===f?' selected':'')+'>'+esc(f)+'</option>';}).join("")+'</select></div>';
+    NOTE_FIELDS.forEach(function(nf){
+      h+='<div class="field"><label>'+esc(nf[1])+'</label><textarea data-note="'+p.id+'|'+nf[0]+'" placeholder="…">'+esc((state.notes[p.id]||{})[nf[0]]||"")+'</textarea></div>';
+    });
+    h+='</div></div>';
+    h+='</div></details>';
+  });
+  return h;
+}
+
+/* ---------- PRICING ---------- */
+function viewPrice(){
+  var h='<div class="sechead"><h2>Pricing</h2><p>Quoted figures in black, anything worked out here marked <span class="chip c-c">calculated</span>. Only Fotograf states a tax position — the other five say nothing about GST, which is the single most important thing to pin down before comparing totals.</p></div>';
+  h+='<div class="banner"><b>Careful with these totals.</b> Five of the six quotations never mention tax. If 18% GST turns out to apply on top of them, the ranking below changes. Ask every photographer in writing.</div>';
+  h+=filterBar();
+  var list=visiblePhotographers();
+
+  h+='<div class="tablewrap"><table><thead><tr><th class="rowlab">Photographer</th><th>Package</th><th style="min-width:120px">Quoted price</th><th style="min-width:150px">Tax</th><th style="min-width:150px">Total payable</th><th style="min-width:200px">Payment terms</th></tr></thead><tbody>';
+  list.forEach(function(p){
+    var pkg=pkgOf(p), pi=priceInfo(p);
+    h+='<tr><td class="rowlab"><div style="font-family:var(--serif);font-size:15px">'+esc(p.name)+'</div><div class="tiny muted">via '+esc(p.referral)+'</div></td>';
+    h+='<td>'+esc(pkg.label)+tierSwitch(p)+'</td>';
+    h+='<td class="mono"><b>'+esc(pi.label)+'</b></td>';
+    h+='<td>'+renderField(pkg.spec.tax)+'</td>';
+    h+='<td>'+renderField(pkg.spec.totalPayable)+'</td>';
+    h+='<td>'+renderField(pkg.spec.payment)+'</td></tr>';
+  });
+  h+='</tbody></table></div>';
+
+  /* Memory Makers builder */
+  var mm=byId("mm");
+  if(mm && list.indexOf(mm)>-1){
+    h+='<h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">The Memory Makers — build your own combination</h3>';
+    h+='<p class="small muted" style="margin:0 0 14px;max-width:70ch">They quoted a rate per crew member per event and never gave a total. Tick what you would actually book. The running total is added up here, not quoted by them.</p>';
+    h+='<div class="card pad">';
+    mm.packages[0].events.forEach(function(e){
+      h+='<div style="margin-bottom:14px"><div class="eyebrow" style="margin-bottom:4px">'+esc(e.name)+'</div>';
+      (e.lines||[]).forEach(function(l){
+        h+='<div class="mmrow"><label><input type="checkbox" data-mm="'+esc(l.id)+'"'+(state.mm[l.id]?" checked":"")+'><span>'+esc(l.label)+(l.note?' <span class="tiny muted">('+esc(l.note)+')</span>':'')+'</span></label><span class="mono">'+rup(l.price)+'</span></div>';
+      });
+      h+='</div>';
+    });
+    h+='<div class="mmtotal"><div><div class="eyebrow">Your selection</div><div class="tiny muted">Added up by this dashboard — The Memory Makers never quoted a total.</div></div><div style="text-align:right"><span class="chip c-c">calculated</span><div class="v" id="mmTotalOut">'+rup(mmTotal())+'</div></div></div>';
+    h+='</div>';
+  }
+
+  h+='<h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 12px">Add-ons and other charges</h3>';
+  h+='<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">';
+  list.forEach(function(p){
+    h+='<div class="card pad"><div style="font-family:var(--serif);font-size:17px;margin-bottom:4px">'+esc(p.name)+'</div>';
+    if(!p.addons.length){ h+='<p class="small" style="color:var(--miss);font-style:italic;margin:6px 0 0">No add-on pricing appears anywhere in this quotation — worth asking for a written list.</p>'; }
+    else{
+      h+='<table style="margin-top:6px"><tbody>'+p.addons.map(function(a){
+        return '<tr><td style="padding:7px 0;border-bottom:1px dashed var(--line)"><b>'+esc(a.n)+'</b>'+(a.note?'<div class="tiny muted">'+esc(a.note)+'</div>':'')+'</td><td class="mono" style="padding:7px 0;border-bottom:1px dashed var(--line);text-align:right;white-space:nowrap">'+esc(a.c)+'</td></tr>';
+      }).join("")+'</tbody></table>';
+    }
+    h+='<div style="margin-top:10px"><div class="eyebrow" style="margin-bottom:4px">Travel / accommodation</div><div class="small">'+renderField(pkgOf(p).spec.travel)+'</div></div>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  h+='<h3 style="font-family:var(--serif);font-size:20px;margin:30px 0 6px">Worked-out comparisons</h3>';
+  h+='<p class="small muted" style="margin:0 0 14px;max-width:72ch">Everything in this block is arithmetic done by this dashboard on the quoted figures. None of it came from a photographer. Price per event is simply the total divided by the number of events — it is a rough yardstick, not a real per-event quote.</p>';
+  h+='<div class="tablewrap"><table><thead><tr><th class="rowlab">Photographer</th><th>Total used</th><th>Price per event</th><th>Photo crew slots</th><th>Video crew slots</th><th>Price per crew slot</th><th>Price per photography hour</th><th>Stated deliverables</th></tr></thead><tbody>';
+  list.forEach(function(p){
+    var pkg=pkgOf(p), pi=priceInfo(p);
+    var nEv=pkg.events.filter(function(e){return !e.addon;}).length;
+    var cp=crewCount(pkg,"p"), cv=crewCount(pkg,"v"), ct=crewCount(pkg);
+    var tot=pi.total;
+    h+='<tr><td class="rowlab">'+esc(p.name)+'</td>';
+    h+='<td class="mono">'+(tot?rup(tot):"—")+'<div class="tiny muted">'+esc(pi.taxNote)+'</div></td>';
+    h+='<td class="mono">'+(tot?rup(tot/nEv):"—")+'<div class="tiny muted">÷ '+nEv+' events</div></td>';
+    h+='<td class="mono">'+cp+'</td><td class="mono">'+cv+'</td>';
+    h+='<td class="mono">'+(tot&&ct?rup(tot/ct):"—")+'<div class="tiny muted">'+ct+' slots</div></td>';
+    var hf=fld(pkg.spec.hours);
+    h+='<td>'+(p.id==="im"&&tot?'<span class="mono">'+rup(tot/20)+' – '+rup(tot/14)+'</span><div class="tiny muted">the only quote stating hours: 2–4h Mandap + 6–8h on each of 2 days = 14–20 hours total</div>':'<span class="val s-m">Cannot calculate — hours not quoted</span>')+'</td>';
+    h+='<td class="mono">'+deliverableCount(pkg)+'<div class="tiny muted">of '+SPEC_GROUPS.reduce(function(a,g){return a+g.rows.length;},0)+' categories</div></td>';
+    h+='</tr>';
+  });
+  h+='</tbody></table></div>';
+  return h;
+}
+
+/* ---------- QUESTIONS ---------- */
+function viewQuest(){
+  var h='<div class="sechead"><h2>Questions to ask</h2><p>Every question on the left comes from something the quotation left out or stated two ways — the reason is printed under each one. The right-hand column is what they have already committed to in writing, so you do not waste a call asking about it. Tick questions off as you get answers; the ticks are saved.</p></div>';
+  h+=filterBar();
+  visiblePhotographers().forEach(function(p){
+    h+='<details class="acc" open><summary><span class="nm">'+esc(p.name)+'</span><span class="tiny muted">via '+esc(p.referral)+'</span>'+
+       '<span class="chip c-u">'+p.questions.gaps.length+' to ask</span><span class="chip c-q">'+p.questions.confirmed.length+' confirmed</span><span class="caret">▸</span></summary>';
+    h+='<div class="accbody"><div class="qgrid">';
+    h+='<div><h4 style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--warn);margin-bottom:9px">Gaps — ask about these</h4><ul class="qlist">';
+    p.questions.gaps.forEach(function(g,i){
+      var key=p.id+"|"+i, done=!!state.asked[key];
+      h+='<li class="'+(done?"done":"")+'"><input type="checkbox" data-ask="'+esc(key)+'"'+(done?" checked":"")+'><div><span class="txt">'+esc(g.q)+'</span><span class="qwhy">Why: '+esc(g.why)+'</span></div></li>';
+    });
+    h+='</ul></div>';
+    h+='<div><h4 style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ok);margin-bottom:9px">Already confirmed in the quotation</h4><ul class="qlist confirmed">';
+    p.questions.confirmed.forEach(function(c){ h+='<li><span class="mk">✓</span><span class="txt">'+esc(c)+'</span></li>'; });
+    h+='</ul></div>';
+    h+='</div>';
+    h+='<div class="field" style="margin-top:16px"><label>My own questions for '+esc(p.name)+'</label><textarea data-note="'+p.id+'|ask">'+esc((state.notes[p.id]||{}).ask||"")+'</textarea></div>';
+    h+='</div></details>';
+  });
+  return h;
+}
+
+/* ---------- BEST FOR ---------- */
+function viewBest(){
+  var fg=byId("fg"), mt=byId("mt");
+  var fgSig=fg.packages[0], fgCla=fg.packages[1];
+  var B=[
+   {cat:"Lowest total price", win:"Moment Treasurers — Quote 1, ₹2,50,000",
+    basis:"The lowest fixed package price quoted. Match in Heaven is ₹10,000 behind at ₹2,60,000. The Memory Makers would come to ₹1,93,000 if you took every line they priced, but that is a total this dashboard added up, not one they quoted, and they list no deliverables at all against it."},
+   {cat:"Best overall value", win:"The Immortal Memories — ₹3,25,000",
+    basis:"The only quote that states coverage hours, and the only one delivering all four video formats in its base price (2 reels, 2–3 min trailer, 10 min highlight, 4–6 hrs traditional) alongside 1,000 edited photos and all RAW photographs. Moment Treasurers and Match in Heaven are cheaper but neither commits to a photo count. Basis: deliverables actually named in the quotation against price, not a judgement of their photography."},
+   {cat:"Most comprehensive package", win:"Fotograf — Signature Experience, ₹4,97,960 with GST",
+    basis:"Up to 2,200 edited images with advanced colour grading, a 24–48 hour preview of 300, a named wedding director, a defined six-stage process, getting-ready portraits and speeches shared separately. It is also the only quotation with written terms covering rescheduling, archiving and privacy. It costs the most, and RAW files are excluded."},
+   {cat:"Best photography offering", win:"Fotograf Signature on volume · Match in Heaven on people",
+    basis:"Fotograf commits to the largest number of edited images (up to 2,200) and the fastest preview. Match in Heaven puts the most photographers on the ground — 9 photographer slots including 3 candid and a guest photographer — but never states how many edited photographs you receive, which is why neither wins outright."},
+   {cat:"Best videography offering", win:"The Immortal Memories — ₹3,25,000",
+    basis:"Base price includes 2 reels, a 2–3 minute trailer, a 10-minute highlight film and 4–6 hours of traditional video, all in 4K, plus one revision round. Fotograf Signature has a longer feature film (12–25 min) but charges ₹20,000 more for traditional coverage and offers no revision round. Emotions & Camera has the longest single film — up to 50 minutes."},
+   {cat:"Best album offering", win:"Fotograf — ₹20,000 per album",
+    basis:"The only quotation that specifies what the album actually is: 12x24 handcrafted photobook, 150 pictures, up to 40 sheets, with priced extensions. Match in Heaven is cheapest to enter at ₹5,000 for 100 photos but gives no size or binding. No photographer includes an album in the base price."},
+   {cat:"Best for a large number of events", win:"The Memory Makers",
+    basis:"The only quotation priced per event, so a fourth or fifth event can be added at a stated rate rather than renegotiated. Every other quote is built around exactly these three days. Caveat: they list no deliverables, so you would be buying crew hours with nothing specified about the output."},
+   {cat:"Best premium offering", win:"Fotograf — Signature Experience",
+    basis:"Highest price, largest photo volume, only creative director, only stated 4K upgrade path (₹49,000), only written terms and conditions, and travel covered by the studio."},
+   {cat:"Fastest delivery", win:"Match in Heaven",
+    basis:"Preview photos in 3 days, all edited photos in 20 days, reels in 20–30 days, full film in 60 days, everything complete within 90. Nearest is Fotograf at 3–4 weeks for photos and 6–9 weeks for films. Slowest is Moment Treasurers at 45–60 days for photos."},
+   {cat:"Raw files included", win:"Emotions & Camera · The Immortal Memories · Match in Heaven",
+    basis:"Emotions & Camera share all RAW images by QR code within 4–6 days. The Immortal Memories give all RAW photographs (a 4TB SSD copy is ₹30,000 extra). Match in Heaven put raw footage and final files on a hard drive. Fotograf exclude RAW outright. Moment Treasurers and The Memory Makers do not mention it."},
+   {cat:"Largest crew on the ground", win:"Match in Heaven — 17 crew slots",
+    basis:"Calculated by adding the people listed for each day: 2 + 6 + 9. Emotions & Camera and Fotograf Signature both come to 16, though Fotograf adds a wedding director and unspecified assistants. Counts people listed, not their experience."},
+   {cat:"Clearest, most binding paperwork", win:"Fotograf, then The Immortal Memories",
+    basis:"Fotograf is the only quote with full terms and conditions and a stated tax position. The Immortal Memories give a four-stage payment schedule, a revision round, a validity period and copyright terms. Emotions & Camera, Match in Heaven, Moment Treasurers and The Memory Makers state no payment terms at all."},
+   {cat:"Biggest unknown", win:"Match in Heaven — no edited photo count",
+    basis:"For ₹2,60,000 the quotation never says how many edited photographs you receive, and the event dates are still printed as “(DATE / YEAR)” placeholders. Moment Treasurers have the same photo-count gap, and additionally describe a two-tier edit where only selected pictures are 'properly edited'."}
+  ];
+  var h='<div class="sechead"><h2>Best for</h2><p>Each of these comes from what the quotations actually say, and the reasoning is printed underneath so you can disagree with it. None of it is a judgement about how good anyone’s photography is — that is what the Instagram links and a meeting are for.</p></div>';
+  h+='<div class="banner">These rankings compare <b>what was written down</b>. A photographer who quoted briefly is not necessarily worse — they may simply have quoted briefly. That is what the questions list is for.</div>';
+  h+='<div class="bestlist">'+B.map(function(b){
+    return '<div class="best"><div class="cat">'+esc(b.cat)+'</div><h4>'+esc(b.win)+'</h4><div class="basis"><b>Basis:</b> '+esc(b.basis)+'</div></div>';
+  }).join("")+'</div>';
+  return h;
+}
+
+/* ---------- MY DECISION ---------- */
+function viewDecide(){
+  var h='<div class="sechead"><h2>My decision</h2><p>Everything you have marked, in one place. Notes live in this browser only — use Export before switching machines.</p></div>';
+  var counts={shortlisted:0,maybe:0,rejected:0,undecided:0};
+  PHOTOGRAPHERS.forEach(function(p){ counts[statusOf(p)||"undecided"]++; });
+  h+='<div class="metricgrid" style="margin-bottom:22px">'+
+   '<div class="metric"><div class="m-l">Shortlisted</div><div class="m-v">'+counts.shortlisted+'</div></div>'+
+   '<div class="metric"><div class="m-l">Maybe</div><div class="m-v">'+counts.maybe+'</div></div>'+
+   '<div class="metric"><div class="m-l">Rejected</div><div class="m-v">'+counts.rejected+'</div></div>'+
+   '<div class="metric"><div class="m-l">Undecided</div><div class="m-v">'+counts.undecided+'</div></div>'+
+   '<div class="metric"><div class="m-l">Questions still open</div><div class="m-v">'+PHOTOGRAPHERS.reduce(function(a,p){
+      return a+p.questions.gaps.filter(function(g,i){return !state.asked[p.id+"|"+i];}).length;},0)+'</div></div>'+
+   '</div>';
+  h+='<div class="card pad">';
+  PHOTOGRAPHERS.forEach(function(p){
+    var pi=priceInfo(p), r=state.rating[p.id]||0;
+    h+='<div class="decrow"><div><div style="font-family:var(--serif);font-size:17px">'+esc(p.name)+'</div><div class="tiny muted">via '+esc(p.referral)+' · '+esc(pkgOf(p).label)+'</div></div>';
+    h+='<div class="mono">'+esc(pi.label)+'</div>';
+    h+='<div>'+starRow(p)+'<div class="tiny muted" style="margin-top:3px">'+(r?r+" / 5":"unrated")+'</div></div>';
+    h+='<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">'+statusButtons(p)+
+      '<span class="tiny muted">'+esc(state.follow[p.id]||FOLLOWUP[0])+'</span></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="card pad" style="margin-top:18px"><div class="field"><label>Where I have landed, and why</label><textarea data-note="final|notes" style="min-height:130px" placeholder="The decision, in your own words…">'+esc((state.notes["final"]||{}).notes||"")+'</textarea></div></div>';
+  h+='<div class="footer"><b>Source files reviewed — all six photographers, seven files:</b><br>'+
+    PHOTOGRAPHERS.map(function(p){ return "&bull; "+esc(p.name)+" — "+p.files.map(esc).join(", "); }).join("<br>")+
+    '<br><br>Extracted on 9 September 2026. Every value in this dashboard is tagged: quoted, calculated, unclear, or not mentioned. Where a quotation gave a combined package price with no event split, the event tables say so rather than estimating one.</div>';
+  return h;
+}
+
+/* ============================================================
+   RENDER + EVENTS
+   ============================================================ */
+var VIEWS={dash:viewDash,compare:viewCompare,events:viewEvents,deliv:viewDeliv,price:viewPrice,quest:viewQuest,best:viewBest,decide:viewDecide};
+function renderTabs(){
+  document.getElementById("tabs").innerHTML=TABS.map(function(t){
+    return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(current===t[0])+'">'+esc(t[1])+'</button>';
+  }).join("");
+}
+function render(){
+  srcSeq=0;
+  renderTabs();
+  var m=document.getElementById("main");
+  m.innerHTML='<section class="panel active">'+VIEWS[current]()+'</section>';
+  var rs=document.getElementById("rowSearch");
+  if(rs){ rs.addEventListener("input",function(){ window.__rowq=this.value; var pos=this.selectionStart; render(); var n=document.getElementById("rowSearch"); if(n){n.focus(); n.setSelectionRange(pos,pos);} }); }
+  window.scrollTo({top:0,behavior:"instant"});
+}
+function flash(el){ var d=el.parentNode.querySelector(".savedot"); if(!d){ d=document.createElement("span"); d.className="savedot"; d.textContent="saved"; el.parentNode.appendChild(d);} d.classList.add("show"); setTimeout(function(){d.classList.remove("show");},1100); }
+
+document.addEventListener("click",function(ev){
+  var t=ev.target.closest("button, a"); if(!t) return;
+  if(t.dataset.tab){ current=t.dataset.tab; render(); return; }
+  if(t.dataset.src!==undefined){ var el=document.getElementById(t.dataset.src); if(el) el.classList.toggle("open"); return; }
+  if(t.dataset.filter){ state.filter=t.dataset.filter; saveState(); render(); return; }
+  if(t.dataset.ev){ currentEvent=t.dataset.ev; render(); return; }
+  if(t.dataset.sel){ var i=state.selected.indexOf(t.dataset.sel); if(i>-1) state.selected.splice(i,1); else state.selected.push(t.dataset.sel); saveState(); render(); return; }
+  if(t.dataset.selall){ state.selected=PHOTOGRAPHERS.map(function(p){return p.id;}); saveState(); render(); return; }
+  if(t.dataset.selnone){ state.selected=[]; saveState(); render(); return; }
+  if(t.dataset.tier){ state.tier[t.dataset.p]=parseInt(t.dataset.tier,10); saveState(); render(); return; }
+  if(t.dataset.status){ var p=t.dataset.p; state.status[p]=(state.status[p]===t.dataset.status)?"":t.dataset.status; saveState(); render(); return; }
+  if(t.dataset.star){ var pid=t.dataset.p, v=parseInt(t.dataset.star,10); state.rating[pid]=(state.rating[pid]===v)?0:v; saveState(); render(); return; }
+  if(t.dataset.openall){ document.querySelectorAll("details.acc").forEach(function(d){d.open=true;}); return; }
+  if(t.dataset.closeall){ document.querySelectorAll("details.acc").forEach(function(d){d.open=false;}); return; }
+  if(t.id==="srcToggle"){ document.body.classList.toggle("showsrc"); t.classList.toggle("on"); return; }
+  if(t.id==="themeToggle"){
+    var cur=document.documentElement.getAttribute("data-theme");
+    var next=cur==="dark"?"light":(cur==="light"?"dark":(window.matchMedia("(prefers-color-scheme: dark)").matches?"light":"dark"));
+    document.documentElement.setAttribute("data-theme",next); state.theme=next; saveState(); return;
+  }
+  if(t.id==="exportBtn"){
+    var json=JSON.stringify(state,null,2);
+    var ta=document.createElement("textarea"); ta.value=json; document.body.appendChild(ta); ta.select();
+    try{ document.execCommand("copy"); t.textContent="Copied to clipboard"; }catch(e){ t.textContent="Copy failed"; }
+    document.body.removeChild(ta); setTimeout(function(){t.textContent="Export notes";},1800); return;
+  }
+  if(t.id==="importBtn"){
+    var raw=prompt("Paste previously exported notes JSON:"); if(!raw) return;
+    try{ var p2=JSON.parse(raw); for(var k in p2) if(p2.hasOwnProperty(k)) state[k]=p2[k]; saveState(); render(); }
+    catch(e){ alert("That did not parse as JSON. Nothing was changed."); }
+    return;
+  }
+});
+document.addEventListener("input",function(ev){
+  var el=ev.target;
+  if(el.dataset.note){
+    var parts=el.dataset.note.split("|");
+    if(!state.notes[parts[0]]) state.notes[parts[0]]={};
+    state.notes[parts[0]][parts[1]]=el.value; saveState(); flash(el); return;
+  }
+  if(el.dataset.evnote){ state.evnotes[el.dataset.evnote]=el.value; saveState(); flash(el); return; }
+});
+document.addEventListener("change",function(ev){
+  var el=ev.target;
+  if(el.dataset.ask){ state.asked[el.dataset.ask]=el.checked; saveState(); el.closest("li").classList.toggle("done",el.checked); return; }
+  if(el.dataset.mm){
+    state.mm[el.dataset.mm]=el.checked; saveState();
+    var out=document.getElementById("mmTotalOut"); if(out) out.textContent=rup(mmTotal());
+    return;
+  }
+  if(el.dataset.follow){ state.follow[el.dataset.follow]=el.value; saveState(); return; }
+});
+
+loadState();
+if(state.theme) document.documentElement.setAttribute("data-theme",state.theme);
+render();
+</script>
+</body>
+</html>
