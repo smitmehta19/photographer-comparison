@@ -1,0 +1,4 @@
+.env
+firestore.rules
+publish.sh
+.env.example

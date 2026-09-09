@@ -6,6 +6,10 @@
 <title>Six Wedding Quotations</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=DM+Mono:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap">
 <style>
 :root{
@@ -258,6 +262,28 @@ ul.qlist.confirmed li .mk{color:var(--ok);font-family:var(--mono);flex:none}
   .metricgrid{grid-template-columns:1fr 1fr}
   .btn{padding:5px 9px;font-size:11.5px}
 }
+/* sync + comments */
+.syncpill{display:inline-flex;align-items:center;gap:6px;font-size:12px;border:1px solid var(--line2);border-radius:999px;padding:4px 11px;background:var(--surface)}
+.syncpill .led{width:7px;height:7px;border-radius:50%;background:var(--faint);flex:none}
+.syncpill.on .led{background:var(--ok)}
+.syncpill.off .led{background:var(--warn)}
+.syncpill img{width:19px;height:19px;border-radius:50%;flex:none}
+.who{font-family:var(--mono);font-size:10.5px;color:var(--faint);margin-top:3px}
+.thread{display:grid;gap:9px;margin-top:10px}
+.cmt{display:grid;grid-template-columns:28px 1fr;gap:10px;padding:10px 12px;background:var(--surface2);border:1px solid var(--line);border-radius:10px}
+.cmt .av{width:28px;height:28px;border-radius:50%;background:var(--accentSoft);color:var(--accent);display:grid;place-items:center;font-weight:600;font-size:12px;overflow:hidden}
+.cmt .av img{width:100%;height:100%;object-fit:cover}
+.cmt .meta{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap;margin-bottom:2px}
+.cmt .nm{font-weight:600;font-size:12.5px}
+.cmt .tm{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
+.cmt .bd{font-size:13px;white-space:pre-wrap;line-height:1.5}
+.cmt .del{border:0;background:transparent;color:var(--faint);cursor:pointer;font-size:11px;margin-left:auto}
+.cmt .del:hover{color:var(--rej)}
+.cmtbox{display:flex;gap:8px;align-items:flex-end;margin-top:10px}
+.cmtbox textarea{min-height:40px}
+.gate{padding:16px;background:var(--accentSoft);border:1px dashed var(--accentLine);border-radius:11px;font-size:13px;color:var(--ink2);text-align:center}
+.ratings{font-size:12px;color:var(--muted);margin-top:4px}
+.ratings b{color:var(--ink2)}
 @media print{header.top,nav.tabs,.selbar,.tools{display:none}.panel{display:block!important}.tablewrap{max-height:none}}
 </style>
 </head>
@@ -270,6 +296,8 @@ ul.qlist.confirmed li .mk{color:var(--ok);font-family:var(--mono);flex:none}
         <div class="sub">26&ndash;28 JAN 2027 &middot; MUMBAI &middot; 6 QUOTATIONS</div>
       </div>
       <div class="tools">
+        <span class="syncpill" id="syncPill"><span class="led"></span><span id="syncTxt">Local only</span></span>
+        <button class="btn" id="authBtn">Sign in to sync</button>
         <button class="btn" id="srcToggle">&#8220;&#8221;&nbsp; Original wording</button>
         <button class="btn" id="themeToggle">Theme</button>
         <button class="btn" id="exportBtn">Export notes</button>
@@ -960,9 +988,16 @@ var EVENT_ORDER=[
  {key:"prewedding", name:"Pre-wedding", sub:"Optional add-on — only Match in Heaven quoted a full package"}
 ];
 var NOTE_FIELDS=[
- ["notes","My notes"],["likes","Things I like"],["dislikes","Things I dislike"],
- ["pros","My pros"],["cons","My cons"],["ask","Questions to ask them"],["negotiate","Negotiation points"]
+ ["notes","Notes"],["likes","Things we like"],["dislikes","Things we don\u2019t like"],
+ ["pros","Pros"],["cons","Cons"],["ask","Questions to ask them"],["negotiate","Negotiation points"]
 ];
+function gateHTML(what){
+  if(DENIED) return '<div class="gate">Signed in as '+esc(ME?ME.email:"")+', but that account is not on the access list for these notes. Ask Smit to add it.</div>';
+  if(ME) return "";
+  var cfgd = window.FIREBASE_CONFIG && String(window.FIREBASE_CONFIG.apiKey).indexOf("PASTE_ME")!==0;
+  if(!cfgd) return '<div class="gate">Sync is not set up yet, so '+esc(what)+' stay on this device only.</div>';
+  return '<div class="gate">Sign in with Google to see and add '+esc(what)+' shared with everyone. Until then you are looking at a local copy.</div>';
+}
 var FOLLOWUP=["Not contacted","Waiting on their reply","Questions sent","Call booked","Met them","Negotiating","Decided"];
 
 /* ============================================================
@@ -1085,9 +1120,16 @@ function statusButtons(p){
   }).join("");
 }
 function starRow(p){
-  var r=state.rating[p.id]||0; var out='<span class="stars" title="My overall rating out of 5">';
+  var r=state.rating[p.id]||0; var out='<span class="stars" title="Your own rating out of 5">';
   for(var i=1;i<=5;i++) out+='<button data-star="'+i+'" data-p="'+p.id+'" class="'+(i<=r?"lit":"")+'" aria-label="Rate '+i+' of 5">'+(i<=r?"★":"☆")+'</button>';
   return out+'</span>';
+}
+function ratingsLine(p){
+  var all=allRatings(p.id);
+  if(all.length<2) return "";
+  var avg=all.reduce(function(a,x){return a+x.r;},0)/all.length;
+  return '<div class="ratings">Everyone: <b>'+avg.toFixed(1)+'/5</b> — '+
+    all.map(function(x){return esc(x.n)+" "+x.r;}).join(" · ")+'</div>';
 }
 function tierSwitch(p){
   if(p.packages.length<2) return "";
@@ -1099,7 +1141,7 @@ function tierSwitch(p){
 /* ---------- DASHBOARD ---------- */
 function viewDash(){
   var list=visiblePhotographers();
-  var h='<div class="sechead"><h2>Six quotations, one screen</h2><p>Every figure below is lifted from the PDF or text file named on each card. Nothing here is inferred: where a quotation is silent, it says so. Shortlist, rate and take notes as you go — everything you type is saved in this browser.</p></div>';
+  var h='<div class="sechead"><h2>Six quotations, one screen</h2><p>Every figure below is lifted from the PDF or text file named on each card. Nothing here is inferred: where a quotation is silent, it says so. Shortlist, rate and take notes as you go. Sign in and everything you write is shared with everyone on the list, on every device.</p></div>';
   h+=legendBar()+filterBar();
   if(!list.length) return h+'<div class="empty">Nothing matches that filter.</div>';
   h+='<div class="dashgrid">';
@@ -1128,6 +1170,7 @@ function viewDash(){
     h+='<div class="taglist">'+p.files.map(function(f){return '<span class="filebadge">'+esc(f)+'</span>';}).join("")+'</div>';
     h+='</div>';
     h+='<div class="cardfoot">'+statusButtons(p)+starRow(p)+'</div>';
+    if(allRatings(p.id).length>1) h+='<div style="padding:0 16px 12px">'+ratingsLine(p)+'</div>';
     h+='</article>';
   });
   return h+'</div>';
@@ -1216,18 +1259,21 @@ function viewEvents(){
     h+='<td>'+renderField(r.e.price)+'</td></tr>';
   });
   h+='</tbody></table></div>';
-  h+='<h3 style="font-family:var(--serif);font-size:19px;margin:26px 0 12px">My notes on the '+esc(ev.name)+'</h3>';
-  h+='<div class="notesgrid">'+rows.map(function(r){
-    var key=r.p.id+"|"+currentEvent;
+  h+='<h3 style="font-family:var(--serif);font-size:19px;margin:26px 0 10px">Notes on the '+esc(ev.name)+'</h3>';
+  h+=gateHTML("event notes");
+  h+='<div class="notesgrid" style="margin-top:12px">'+rows.map(function(r){
+    var key=r.p.id+"|"+currentEvent, who=SHby("evnotes",key);
     return '<div class="card pad field"><label>'+esc(r.p.name)+'</label>'+
-      '<textarea data-evnote="'+esc(key)+'" placeholder="What matters to you about this photographer for the '+esc(ev.name)+'…">'+esc(state.evnotes[key]||"")+'</textarea></div>';
+      '<textarea data-evnote="'+esc(key)+'" placeholder="What matters about this photographer for the '+esc(ev.name)+'…">'+esc(state.evnotes[key]||"")+'</textarea>'+
+      (who?'<div class="who">last edited by '+esc(who)+'</div>':'')+
+      threadHTML(r.p.id, currentEvent)+'</div>';
   }).join("")+'</div>';
   return h;
 }
 
 /* ---------- EVERY DELIVERABLE ---------- */
 function viewDeliv(){
-  var h='<div class="sechead"><h2>Every deliverable, nothing condensed</h2><p>The full extraction for each photographer, category by category, with the original wording one click away. Your own notes for each one sit at the bottom of their panel.</p></div>';
+  var h='<div class="sechead"><h2>Every deliverable, nothing condensed</h2><p>The full extraction for each photographer, category by category, with the original wording one click away. Shared notes and a comment thread sit at the bottom of each panel.</p></div>';
   h+=legendBar()+filterBar();
   h+='<div class="selbar"><button class="btn" data-openall="1">Expand all</button><button class="btn" data-closeall="1">Collapse all</button></div>';
   visiblePhotographers().forEach(function(p){
@@ -1277,15 +1323,21 @@ function viewDeliv(){
     h+='<div class="dl-item"><div class="k">Against them</div><div><ul style="margin:0;padding-left:17px">'+p.cons.map(function(x){return '<li>'+esc(x)+'</li>';}).join("")+'</ul></div></div>';
     h+='</div></div>';
 
-    h+='<div class="dl-sec"><h4>My notes</h4>';
-    h+='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px">'+statusButtons(p)+starRow(p)+'</div>';
+    h+='<div class="dl-sec"><h4>Notes &amp; comments</h4>';
+    h+=gateHTML("notes");
+    h+='<div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:12px 0">'+statusButtons(p)+starRow(p)+'</div>';
+    h+=ratingsLine(p);
     h+='<div class="notesgrid">';
     h+='<div class="field"><label>Follow-up status</label><select data-follow="'+p.id+'">'+FOLLOWUP.map(function(f){
       return '<option'+((state.follow[p.id]||FOLLOWUP[0])===f?' selected':'')+'>'+esc(f)+'</option>';}).join("")+'</select></div>';
     NOTE_FIELDS.forEach(function(nf){
-      h+='<div class="field"><label>'+esc(nf[1])+'</label><textarea data-note="'+p.id+'|'+nf[0]+'" placeholder="…">'+esc((state.notes[p.id]||{})[nf[0]]||"")+'</textarea></div>';
+      var who=SHby("fields", p.id+"|"+nf[0]);
+      h+='<div class="field"><label>'+esc(nf[1])+'</label><textarea data-note="'+p.id+'|'+nf[0]+'" placeholder="…">'+esc((state.notes[p.id]||{})[nf[0]]||"")+'</textarea>'+
+         (who?'<div class="who">last edited by '+esc(who)+'</div>':'')+'</div>';
     });
-    h+='</div></div>';
+    h+='</div>';
+    h+='<div style="margin-top:18px"><div class="eyebrow" style="margin-bottom:6px">Conversation</div>'+threadHTML(p.id,"")+'</div>';
+    h+='</div>';
     h+='</div></details>';
   });
   return h;
@@ -1382,7 +1434,8 @@ function viewQuest(){
     p.questions.confirmed.forEach(function(c){ h+='<li><span class="mk">✓</span><span class="txt">'+esc(c)+'</span></li>'; });
     h+='</ul></div>';
     h+='</div>';
-    h+='<div class="field" style="margin-top:16px"><label>My own questions for '+esc(p.name)+'</label><textarea data-note="'+p.id+'|ask">'+esc((state.notes[p.id]||{}).ask||"")+'</textarea></div>';
+    h+='<div style="margin-top:16px">'+threadHTML(p.id,"questions")+'</div>';
+    h+='<div class="field" style="margin-top:16px"><label>Our own questions for '+esc(p.name)+'</label><textarea data-note="'+p.id+'|ask">'+esc((state.notes[p.id]||{}).ask||"")+'</textarea></div>';
     h+='</div></details>';
   });
   return h;
@@ -1430,7 +1483,7 @@ function viewBest(){
 
 /* ---------- MY DECISION ---------- */
 function viewDecide(){
-  var h='<div class="sechead"><h2>My decision</h2><p>Everything you have marked, in one place. Notes live in this browser only — use Export before switching machines.</p></div>';
+  var h='<div class="sechead"><h2>My decision</h2><p>Everything marked, in one place. Signed in, all of it syncs across devices and everyone on the list; signed out, you are working on a local copy.</p></div>';
   var counts={shortlisted:0,maybe:0,rejected:0,undecided:0};
   PHOTOGRAPHERS.forEach(function(p){ counts[statusOf(p)||"undecided"]++; });
   h+='<div class="metricgrid" style="margin-bottom:22px">'+
@@ -1446,12 +1499,13 @@ function viewDecide(){
     var pi=priceInfo(p), r=state.rating[p.id]||0;
     h+='<div class="decrow"><div><div style="font-family:var(--serif);font-size:17px">'+esc(p.name)+'</div><div class="tiny muted">via '+esc(p.referral)+' · '+esc(pkgOf(p).label)+'</div></div>';
     h+='<div class="mono">'+esc(pi.label)+'</div>';
-    h+='<div>'+starRow(p)+'<div class="tiny muted" style="margin-top:3px">'+(r?r+" / 5":"unrated")+'</div></div>';
+    h+='<div>'+starRow(p)+'<div class="tiny muted" style="margin-top:3px">'+(r?r+" / 5":"unrated")+'</div>'+ratingsLine(p)+'</div>';
     h+='<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">'+statusButtons(p)+
       '<span class="tiny muted">'+esc(state.follow[p.id]||FOLLOWUP[0])+'</span></div></div>';
   });
   h+='</div>';
-  h+='<div class="card pad" style="margin-top:18px"><div class="field"><label>Where I have landed, and why</label><textarea data-note="final|notes" style="min-height:130px" placeholder="The decision, in your own words…">'+esc((state.notes["final"]||{}).notes||"")+'</textarea></div></div>';
+  h+='<div class="card pad" style="margin-top:18px"><div class="field"><label>Where we have landed, and why</label><textarea data-note="final|notes" style="min-height:130px" placeholder="The decision, in your own words…">'+esc((state.notes["final"]||{}).notes||"")+'</textarea>'+
+    (SHby("fields","final|notes")?'<div class="who">last edited by '+esc(SHby("fields","final|notes"))+'</div>':'')+'</div></div>';
   h+='<div class="footer"><b>Source files reviewed — all six photographers, seven files:</b><br>'+
     PHOTOGRAPHERS.map(function(p){ return "&bull; "+esc(p.name)+" — "+p.files.map(esc).join(", "); }).join("<br>")+
     '<br><br>Extracted on 9 September 2026. Every value in this dashboard is tagged: quoted, calculated, unclear, or not mentioned. Where a quotation gave a combined package price with no event split, the event tables say so rather than estimating one.</div>';
@@ -1487,11 +1541,27 @@ document.addEventListener("click",function(ev){
   if(t.dataset.sel){ var i=state.selected.indexOf(t.dataset.sel); if(i>-1) state.selected.splice(i,1); else state.selected.push(t.dataset.sel); saveState(); render(); return; }
   if(t.dataset.selall){ state.selected=PHOTOGRAPHERS.map(function(p){return p.id;}); saveState(); render(); return; }
   if(t.dataset.selnone){ state.selected=[]; saveState(); render(); return; }
-  if(t.dataset.tier){ state.tier[t.dataset.p]=parseInt(t.dataset.tier,10); saveState(); render(); return; }
-  if(t.dataset.status){ var p=t.dataset.p; state.status[p]=(state.status[p]===t.dataset.status)?"":t.dataset.status; saveState(); render(); return; }
-  if(t.dataset.star){ var pid=t.dataset.p, v=parseInt(t.dataset.star,10); state.rating[pid]=(state.rating[pid]===v)?0:v; saveState(); render(); return; }
+  if(t.dataset.tier){ pushShared("tier",t.dataset.p,parseInt(t.dataset.tier,10)); render(); return; }
+  if(t.dataset.status){ var p=t.dataset.p; pushShared("status",p,(state.status[p]===t.dataset.status)?"":t.dataset.status); render(); return; }
+  if(t.dataset.star){ var pid=t.dataset.p, v=parseInt(t.dataset.star,10); pushRating(pid,(state.rating[pid]===v)?0:v); render(); return; }
   if(t.dataset.openall){ document.querySelectorAll("details.acc").forEach(function(d){d.open=true;}); return; }
   if(t.dataset.closeall){ document.querySelectorAll("details.acc").forEach(function(d){d.open=false;}); return; }
+  if(t.id==="authBtn"){
+    if(!window.firebase||!window.FIREBASE_CONFIG||String(window.FIREBASE_CONFIG.apiKey).indexOf("PASTE_ME")===0){
+      alert("Sync is not configured yet. Fill in firebase-config.js and push again."); return;
+    }
+    if(ME){ firebase.auth().signOut(); COMMENTS=[]; SYNCED=false; return; }
+    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
+      .catch(function(e){ alert("Sign-in failed: "+(e&&e.message||"unknown error")); });
+    return;
+  }
+  if(t.dataset.cmtsend){
+    var k=t.dataset.cmtsend.split("|");
+    var ta=document.querySelector('[data-cmt="'+t.dataset.cmtsend+'"]');
+    if(ta){ addComment(k[0], k[1], ta.value); ta.value=""; }
+    return;
+  }
+  if(t.dataset.delc){ delComment(t.dataset.delc); return; }
   if(t.id==="srcToggle"){ document.body.classList.toggle("showsrc"); t.classList.toggle("on"); return; }
   if(t.id==="themeToggle"){
     var cur=document.documentElement.getAttribute("data-theme");
@@ -1499,41 +1569,215 @@ document.addEventListener("click",function(ev){
     document.documentElement.setAttribute("data-theme",next); state.theme=next; saveState(); return;
   }
   if(t.id==="exportBtn"){
-    var json=JSON.stringify(state,null,2);
+    var json=JSON.stringify({state:state, shared:SH, comments:COMMENTS},null,2);
     var ta=document.createElement("textarea"); ta.value=json; document.body.appendChild(ta); ta.select();
     try{ document.execCommand("copy"); t.textContent="Copied to clipboard"; }catch(e){ t.textContent="Copy failed"; }
     document.body.removeChild(ta); setTimeout(function(){t.textContent="Export notes";},1800); return;
   }
   if(t.id==="importBtn"){
     var raw=prompt("Paste previously exported notes JSON:"); if(!raw) return;
-    try{ var p2=JSON.parse(raw); for(var k in p2) if(p2.hasOwnProperty(k)) state[k]=p2[k]; saveState(); render(); }
+    try{
+      var p2=JSON.parse(raw);
+      if(p2.shared){ for(var k in p2.shared) SH[k]=p2.shared[k]; saveShared(); }
+      var st=p2.state||p2;
+      for(var k in st) if(st.hasOwnProperty(k)) state[k]=st[k];
+      saveState(); applyShared(); render();
+    }
     catch(e){ alert("That did not parse as JSON. Nothing was changed."); }
     return;
   }
 });
 document.addEventListener("input",function(ev){
   var el=ev.target;
-  if(el.dataset.note){
-    var parts=el.dataset.note.split("|");
-    if(!state.notes[parts[0]]) state.notes[parts[0]]={};
-    state.notes[parts[0]][parts[1]]=el.value; saveState(); flash(el); return;
-  }
-  if(el.dataset.evnote){ state.evnotes[el.dataset.evnote]=el.value; saveState(); flash(el); return; }
+  if(el.dataset.note){ pushShared("fields", el.dataset.note, el.value); flash(el); return; }
+  if(el.dataset.evnote){ pushShared("evnotes", el.dataset.evnote, el.value); flash(el); return; }
 });
 document.addEventListener("change",function(ev){
   var el=ev.target;
-  if(el.dataset.ask){ state.asked[el.dataset.ask]=el.checked; saveState(); el.closest("li").classList.toggle("done",el.checked); return; }
+  if(el.dataset.ask){ pushShared("asked", el.dataset.ask, el.checked); el.closest("li").classList.toggle("done",el.checked); return; }
   if(el.dataset.mm){
-    state.mm[el.dataset.mm]=el.checked; saveState();
+    pushShared("mm", el.dataset.mm, el.checked);
     var out=document.getElementById("mmTotalOut"); if(out) out.textContent=rup(mmTotal());
     return;
   }
-  if(el.dataset.follow){ state.follow[el.dataset.follow]=el.value; saveState(); return; }
+  if(el.dataset.follow){ pushShared("follow", el.dataset.follow, el.value); return; }
 });
 
+/* ============================================================
+   SHARED STATE  (Firebase Firestore, offline-first)
+   SH mirrors the single Firestore doc boards/main.
+   Every entry is {v: value, by: name, at: ms} so the page can
+   show who changed what. Ratings are per person, keyed by uid.
+   With no Firebase or nobody signed in, SH lives in localStorage
+   and the page behaves exactly as it did before.
+   ============================================================ */
+var SH={status:{},follow:{},fields:{},evnotes:{},asked:{},ratings:{},people:{},tier:{},mm:{}};
+var ME=null, COMMENTS=[], FS=null, DOCREF=null, CREF=null, SYNCED=false, DENIED=false;
+
+function SHget(sec,key){ var e=SH[sec]&&SH[sec][key]; return e&&typeof e==="object"&&"v" in e?e.v:e; }
+function SHby(sec,key){ var e=SH[sec]&&SH[sec][key]; return e&&typeof e==="object"?(e.by||""):""; }
+
+/* project the shared doc onto the render state the views already read */
+function applyShared(){
+  state.status={}; state.follow={}; state.notes={}; state.evnotes={}; state.asked={}; state.rating={};
+  for(var k in SH.status){ var v=SHget("status",k); if(v) state.status[k]=v; }
+  for(var k in SH.follow){ state.follow[k]=SHget("follow",k); }
+  for(var k in SH.fields){ var p=k.split("|"); if(!state.notes[p[0]]) state.notes[p[0]]={}; state.notes[p[0]][p[1]]=SHget("fields",k); }
+  for(var k in SH.evnotes){ state.evnotes[k]=SHget("evnotes",k); }
+  for(var k in SH.asked){ state.asked[k]=SHget("asked",k); }
+  for(var k in SH.tier){ state.tier[k]=SHget("tier",k); }
+  if(SH.mm && Object.keys(SH.mm).length){ state.mm={}; for(var k in SH.mm) state.mm[k]=SHget("mm",k); }
+  var mine=ME?(SH.ratings[ME.uid]||{}):(SH.ratings.local||{});
+  for(var k in mine) state.rating[k]=mine[k];
+  PHOTOGRAPHERS.forEach(function(p){ if(state.tier[p.id]===undefined) state.tier[p.id]=0; });
+}
+/* everyone's ratings for one photographer */
+function allRatings(pid){
+  var out=[];
+  for(var uid in SH.ratings){
+    var r=SH.ratings[uid][pid];
+    if(r) out.push({n:(SH.people[uid]&&SH.people[uid].name)||(uid==="local"?"You":"Someone"), r:r});
+  }
+  return out;
+}
+var pending={}, pushTimer=null;
+function pushShared(sec,key,value){
+  if(!SH[sec]) SH[sec]={};
+  SH[sec][key]={v:value, by:ME?ME.name:"", at:Date.now()};
+  if(!pending[sec]) pending[sec]={};
+  pending[sec][key]=SH[sec][key];
+  applyShared(); saveShared();
+  scheduleFlush();
+}
+function pushRating(pid,val){
+  var uid=ME?ME.uid:"local";
+  if(!SH.ratings[uid]) SH.ratings[uid]={};
+  if(val) SH.ratings[uid][pid]=val; else delete SH.ratings[uid][pid];
+  if(!pending.ratings) pending.ratings={};
+  pending.ratings[uid]=SH.ratings[uid];
+  applyShared(); saveShared(); scheduleFlush();
+}
+function scheduleFlush(){
+  if(!DOCREF) return;
+  clearTimeout(pushTimer);
+  pushTimer=setTimeout(function(){
+    var payload=pending; pending={};
+    if(ME){ payload.people=payload.people||{}; payload.people[ME.uid]={name:ME.name,photo:ME.photo}; }
+    DOCREF.set(payload,{merge:true}).catch(function(e){ setSync("error", e&&e.code||"write failed"); });
+  },450);
+}
+function saveShared(){ try{ localStorage.setItem(LSKEY+".shared", JSON.stringify(SH)); }catch(e){} }
+function loadShared(){
+  try{ var r=localStorage.getItem(LSKEY+".shared"); if(r){ var o=JSON.parse(r); for(var k in o) SH[k]=o[k]; } }catch(e){}
+  /* migrate the old local-only notes the first time */
+  try{
+    if(!Object.keys(SH.fields).length && state.notes){
+      for(var pid in state.notes) for(var f in state.notes[pid])
+        if(state.notes[pid][f]) SH.fields[pid+"|"+f]={v:state.notes[pid][f],by:"",at:Date.now()};
+    }
+    if(!Object.keys(SH.status).length) for(var pid in state.status) if(state.status[pid]) SH.status[pid]={v:state.status[pid],by:"",at:Date.now()};
+    if(!Object.keys(SH.evnotes).length) for(var k in state.evnotes) if(state.evnotes[k]) SH.evnotes[k]={v:state.evnotes[k],by:"",at:Date.now()};
+    if(!Object.keys(SH.asked).length) for(var k in state.asked) if(state.asked[k]) SH.asked[k]={v:true,by:"",at:Date.now()};
+    if(!SH.ratings.local && state.rating && Object.keys(state.rating).length) SH.ratings.local=JSON.parse(JSON.stringify(state.rating));
+  }catch(e){}
+  saveShared();
+}
+function setSync(kind,msg){
+  var pill=document.getElementById("syncPill"), txt=document.getElementById("syncTxt");
+  if(!pill) return;
+  pill.className="syncpill"+(kind==="on"?" on":(kind==="off"||kind==="error"?" off":""));
+  txt.textContent=msg;
+  var av=pill.querySelector("img"); if(av) av.remove();
+  if(kind==="on"&&ME&&ME.photo){ var i=document.createElement("img"); i.src=ME.photo; i.alt=""; pill.appendChild(i); }
+  var b=document.getElementById("authBtn");
+  if(b) b.textContent = ME? "Sign out" : "Sign in to sync";
+}
+function allowed(email){
+  var L=window.ALLOWED_EMAILS;
+  if(!L||!L.length) return true;
+  return L.map(function(x){return String(x).toLowerCase().trim();}).indexOf(String(email).toLowerCase())>-1;
+}
+function initSync(){
+  var cfg=window.FIREBASE_CONFIG;
+  if(!cfg || !window.firebase || String(cfg.apiKey).indexOf("PASTE_ME")===0){
+    setSync("off","Local only — notes stay on this device"); return;
+  }
+  try{ firebase.initializeApp(cfg); FS=firebase.firestore(); }
+  catch(e){ setSync("error","Sync unavailable"); return; }
+  DOCREF=FS.doc("boards/main"); CREF=FS.collection("boards/main/comments");
+  setSync("","Not signed in");
+  firebase.auth().onAuthStateChanged(function(u){
+    if(u && !allowed(u.email)){
+      setSync("error","No access for "+u.email);
+      alert("This dashboard is limited to a set of Google accounts and "+u.email+" is not one of them.");
+      firebase.auth().signOut(); return;
+    }
+    ME = u ? {uid:u.uid, name:u.displayName||u.email, email:u.email, photo:u.photoURL||""} : null;
+    if(ME){ setSync("on","Synced"); subscribe(); }
+    else { setSync("","Not signed in"); }
+    applyShared(); render();
+  });
+}
+function subscribe(){
+  if(SYNCED||!DOCREF) return; SYNCED=true;
+  DOCREF.onSnapshot(function(snap){
+    var d=snap.data()||{};
+    ["status","follow","fields","evnotes","asked","ratings","people","tier","mm"].forEach(function(k){
+      if(d[k]) SH[k]=d[k];
+    });
+    applyShared(); saveShared(); render();
+  }, function(e){
+    if(e&&e.code==="permission-denied"){
+      setSync("error","Not on the access list");
+      DENIED=true; render();
+    } else setSync("error","Sync error");
+  });
+  CREF.orderBy("at").onSnapshot(function(qs){
+    COMMENTS=[]; qs.forEach(function(doc){ var o=doc.data(); o.id=doc.id; COMMENTS.push(o); });
+    render();
+  }, function(){});
+}
+function addComment(pid, ev, text){
+  if(!text.trim()) return;
+  var c={pid:pid, ev:ev||"", text:text.trim(), uid:ME?ME.uid:"local",
+         name:ME?ME.name:"You", photo:ME?ME.photo:"", at:Date.now()};
+  if(CREF&&ME){ CREF.add(c).catch(function(){ alert("Could not post that comment."); }); }
+  else { c.id="local"+Date.now(); COMMENTS.push(c); render(); }
+}
+function delComment(id){
+  if(CREF&&ME){ CREF.doc(id).delete().catch(function(){ alert("Could not delete that comment."); }); }
+  else { COMMENTS=COMMENTS.filter(function(c){return c.id!==id;}); render(); }
+}
+function when(ms){
+  var d=new Date(ms), n=Date.now(), diff=(n-ms)/1000;
+  if(diff<60) return "just now";
+  if(diff<3600) return Math.floor(diff/60)+"m ago";
+  if(diff<86400) return Math.floor(diff/3600)+"h ago";
+  return d.toLocaleDateString(undefined,{day:"numeric",month:"short"})+" "+d.toLocaleTimeString(undefined,{hour:"2-digit",minute:"2-digit"});
+}
+function threadHTML(pid, ev){
+  var list=COMMENTS.filter(function(c){ return c.pid===pid && (c.ev||"")===(ev||""); });
+  var h='<div class="thread">';
+  if(!list.length) h+='<div class="tiny muted">No comments yet.</div>';
+  list.forEach(function(c){
+    var ini=(c.name||"?").trim().charAt(0).toUpperCase();
+    h+='<div class="cmt"><div class="av">'+(c.photo?'<img src="'+esc(c.photo)+'" alt="">':esc(ini))+'</div><div>'+
+       '<div class="meta"><span class="nm">'+esc(c.name)+'</span><span class="tm">'+esc(when(c.at))+'</span>'+
+       ((ME&&c.uid===ME.uid)||(!ME&&c.uid==="local")?'<button class="del" data-delc="'+esc(c.id)+'">delete</button>':'')+
+       '</div><div class="bd">'+esc(c.text)+'</div></div></div>';
+  });
+  h+='</div>';
+  h+='<div class="cmtbox"><textarea data-cmt="'+esc(pid)+'|'+esc(ev||"")+'" placeholder="Add a comment everyone can see…"></textarea>'+
+     '<button class="btn" data-cmtsend="'+esc(pid)+'|'+esc(ev||"")+'">Post</button></div>';
+  return h;
+}
 loadState();
+loadShared();
+applyShared();
+
 if(state.theme) document.documentElement.setAttribute("data-theme",state.theme);
 render();
+initSync();
 </script>
 </body>
 </html>
