@@ -262,6 +262,13 @@ ul.qlist.confirmed li .mk{color:var(--ok);font-family:var(--mono);flex:none}
   .metricgrid{grid-template-columns:1fr 1fr}
   .btn{padding:5px 9px;font-size:11.5px}
 }
+.authnote{display:flex;gap:14px;align-items:flex-start;padding:13px 15px;border-radius:11px;margin-bottom:18px;font-size:13px;line-height:1.5}
+.authnote b{display:block;margin-bottom:3px}
+.authnote code{font-family:var(--mono);font-size:11.5px;background:rgba(128,128,128,.16);padding:1px 5px;border-radius:4px}
+.authnote button{margin-left:auto;flex:none}
+.authnote.bad{background:var(--warnSoft);border-left:3px solid var(--warn);color:var(--ink2)}
+.authnote.ok{background:var(--accentSoft);border-left:3px solid var(--accent);color:var(--ink2)}
+.btn.sm{padding:4px 9px;font-size:11.5px}
 /* sync + comments */
 .syncpill{display:inline-flex;align-items:center;gap:6px;font-size:12px;border:1px solid var(--line2);border-radius:999px;padding:4px 11px;background:var(--surface)}
 .syncpill .led{width:7px;height:7px;border-radius:50%;background:var(--faint);flex:none}
@@ -1508,7 +1515,7 @@ function viewDecide(){
     (SHby("fields","final|notes")?'<div class="who">last edited by '+esc(SHby("fields","final|notes"))+'</div>':'')+'</div></div>';
   h+='<div class="footer"><b>Source files reviewed — all six photographers, seven files:</b><br>'+
     PHOTOGRAPHERS.map(function(p){ return "&bull; "+esc(p.name)+" — "+p.files.map(esc).join(", "); }).join("<br>")+
-    '<br><br>Extracted on 9 September 2026. Every value in this dashboard is tagged: quoted, calculated, unclear, or not mentioned. Where a quotation gave a combined package price with no event split, the event tables say so rather than estimating one.</div>';
+    '<br><br><span class="mono">build 2026-09-09b</span> &middot; Extracted on 9 September 2026. Every value in this dashboard is tagged: quoted, calculated, unclear, or not mentioned. Where a quotation gave a combined package price with no event split, the event tables say so rather than estimating one.</div>';
   return h;
 }
 
@@ -1546,15 +1553,8 @@ document.addEventListener("click",function(ev){
   if(t.dataset.star){ var pid=t.dataset.p, v=parseInt(t.dataset.star,10); pushRating(pid,(state.rating[pid]===v)?0:v); render(); return; }
   if(t.dataset.openall){ document.querySelectorAll("details.acc").forEach(function(d){d.open=true;}); return; }
   if(t.dataset.closeall){ document.querySelectorAll("details.acc").forEach(function(d){d.open=false;}); return; }
-  if(t.id==="authBtn"){
-    if(!window.firebase||!window.FIREBASE_CONFIG||String(window.FIREBASE_CONFIG.apiKey).indexOf("PASTE_ME")===0){
-      alert("Sync is not configured yet. Fill in firebase-config.js and push again."); return;
-    }
-    if(ME){ firebase.auth().signOut(); COMMENTS=[]; SYNCED=false; return; }
-    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider())
-      .catch(function(e){ alert("Sign-in failed: "+(e&&e.message||"unknown error")); });
-    return;
-  }
+  if(t.id==="authBtn"){ doAuth(); return; }
+  if(t.id==="authNoteX"){ var n=document.getElementById("authNote"); if(n) n.remove(); return; }
   if(t.dataset.cmtsend){
     var k=t.dataset.cmtsend.split("|");
     var ta=document.querySelector('[data-cmt="'+t.dataset.cmtsend+'"]');
@@ -1697,6 +1697,53 @@ function allowed(email){
   if(!L||!L.length) return true;
   return L.map(function(x){return String(x).toLowerCase().trim();}).indexOf(String(email).toLowerCase())>-1;
 }
+function authNote(kind,title,body){
+  var old=document.getElementById("authNote"); if(old) old.remove();
+  if(!kind) return;
+  var d=document.createElement("div");
+  d.id="authNote"; d.className="authnote "+kind;
+  d.innerHTML='<div><b>'+esc(title)+'</b><div>'+body+'</div></div><button class="btn sm" id="authNoteX">Dismiss</button>';
+  var m=document.getElementById("main");
+  m.insertBefore(d, m.firstChild);
+}
+function configured(){
+  return !!(window.firebase && window.FIREBASE_CONFIG && String(window.FIREBASE_CONFIG.apiKey).indexOf("PASTE_ME")!==0);
+}
+var POPUP_FALLBACK=["auth/popup-blocked","auth/popup-closed-by-user","auth/cancelled-popup-request",
+  "auth/operation-not-supported-in-this-environment","auth/web-storage-unsupported","auth/internal-error"];
+function doAuth(){
+  if(!configured()){
+    authNote("bad","Sync is not configured on this copy of the page",
+      "This file has no Firebase settings next to it. Open the hosted version at <b>smitmehta19.github.io/photographer-comparison</b> — the local file only saves to this browser.");
+    return;
+  }
+  if(ME){ firebase.auth().signOut().then(function(){ COMMENTS=[]; SYNCED=false; }); return; }
+  setSync("","Opening Google…");
+  var prov=new firebase.auth.GoogleAuthProvider();
+  prov.setCustomParameters({prompt:"select_account"});
+  firebase.auth().signInWithPopup(prov).catch(function(e){
+    var code=(e&&e.code)||"unknown";
+    if(POPUP_FALLBACK.indexOf(code)>-1){
+      authNote("ok","Opening Google sign-in in this tab",
+        "The pop-up did not open (<code>"+esc(code)+"</code>), so we are redirecting instead. You will come straight back here.");
+      setSync("","Redirecting to Google…");
+      firebase.auth().signInWithRedirect(prov).catch(function(e2){ showAuthError(e2); });
+      return;
+    }
+    showAuthError(e);
+  });
+}
+function showAuthError(e){
+  var code=(e&&e.code)||"unknown", msg=(e&&e.message)||"";
+  var hint="";
+  if(code==="auth/unauthorized-domain") hint="Add <b>smitmehta19.github.io</b> under Firebase → Authentication → Settings → Authorised domains.";
+  else if(code==="auth/operation-not-allowed") hint="Enable the Google provider under Firebase → Authentication → Sign-in method.";
+  else if(code.indexOf("api-key")>-1||code==="auth/invalid-api-key") hint="The Firebase settings in firebase-config.js do not match the project.";
+  else if(code==="auth/network-request-failed") hint="The browser could not reach Google. Check the connection, then try again.";
+  else hint="Send this code to Claude and it can tell you exactly what to change.";
+  setSync("error","Sign-in failed");
+  authNote("bad","Google sign-in failed — <code>"+esc(code)+"</code>", esc(msg)+"<br><br>"+hint);
+}
 function initSync(){
   var cfg=window.FIREBASE_CONFIG;
   if(!cfg || !window.firebase || String(cfg.apiKey).indexOf("PASTE_ME")===0){
@@ -1705,15 +1752,17 @@ function initSync(){
   try{ firebase.initializeApp(cfg); FS=firebase.firestore(); }
   catch(e){ setSync("error","Sync unavailable"); return; }
   DOCREF=FS.doc("boards/main"); CREF=FS.collection("boards/main/comments");
+  firebase.auth().getRedirectResult().catch(function(e){ showAuthError(e); });
   setSync("","Not signed in");
   firebase.auth().onAuthStateChanged(function(u){
     if(u && !allowed(u.email)){
       setSync("error","No access for "+u.email);
-      alert("This dashboard is limited to a set of Google accounts and "+u.email+" is not one of them.");
+      authNote("bad","That account is not on the access list",
+        esc(u.email)+" signed in successfully, but it is not one of the addresses allowed in the Firestore rules. Sign in with a different account, or add this one to the rules.");
       firebase.auth().signOut(); return;
     }
     ME = u ? {uid:u.uid, name:u.displayName||u.email, email:u.email, photo:u.photoURL||""} : null;
-    if(ME){ setSync("on","Synced"); subscribe(); }
+    if(ME){ setSync("on","Synced"); authNote(null); subscribe(); }
     else { setSync("","Not signed in"); }
     applyShared(); render();
   });
